@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Informatika – Príručka</title>
+  <meta name="description" content="Rýchla príručka k informatike – Tkinter, konzolové úlohy, Excel/Word, grafika.">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <span class="header__icon">📘</span>
+    <h1 class="header__title">Informatika – Príručka</h1>
+    <p class="header__subtitle">Rýchly prehľad syntaxe a logiky</p>
+  </header>
+
+  <!-- ===== TAB NAVIGATION ===== -->
+  <nav class="tabs">
+    <ul class="tabs__list">
+      <li><button class="tabs__btn active" data-tab="tab-tkinter"><span class="tabs__icon">🖼️</span> Tkinter</button></li>
+      <li><button class="tabs__btn" data-tab="tab-konzola"><span class="tabs__icon">💻</span> Konzolové úlohy</button></li>
+      <li><button class="tabs__btn" data-tab="tab-excel"><span class="tabs__icon">📊</span> Excel / Word</button></li>
+      <li><button class="tabs__btn" data-tab="tab-grafika"><span class="tabs__icon">🎨</span> Grafika</button></li>
+    </ul>
+  </nav>
+
+  <!-- ===== LAYOUT (SIDEBAR + MAIN) ===== -->
+  <div class="layout">
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="sidebar">
+      <input type="search" id="sidebar-search" class="sidebar__search" placeholder="🔍 Hľadaj…" autocomplete="off">
+      <p class="sidebar__section-label">Tkinter</p>
+      <nav class="sidebar__nav">
+        <a href="#tk-kostra"    class="sidebar__link active"><span class="sidebar__num">1</span> Kostra</a>
+        <a href="#tk-kreslenie" class="sidebar__link"><span class="sidebar__num">2</span> Kreslenie</a>
+        <a href="#tk-vstupy"    class="sidebar__link"><span class="sidebar__num">3</span> Vstupy</a>
+        <a href="#tk-eventy"    class="sidebar__link"><span class="sidebar__num">4</span> Eventy</a>
+        <a href="#tk-vzorec"    class="sidebar__link"><span class="sidebar__num">5</span> Vzorec</a>
+        <a href="#tk-animacie"  class="sidebar__link"><span class="sidebar__num">6</span> Animácie</a>
+        <a href="#tk-objekty"   class="sidebar__link"><span class="sidebar__num">7</span> Objekty</a>
+        <a href="#tk-subory"    class="sidebar__link"><span class="sidebar__num">8</span> Súbory</a>
+      </nav>
+      <div class="sidebar__divider"></div>
+      <div class="sidebar__bottom">
+        <button class="sidebar__scroll-btn" id="scroll-top-btn">↑ Vrch</button>
+        <button class="sidebar__scroll-btn" id="scroll-bot-btn">↓ Koniec</button>
+      </div>
+    </aside>
+
+    <main class="main">
+
+    <!-- ========================================== -->
+    <!-- TAB: TKINTER                               -->
+    <!-- ========================================== -->
+    <div id="tab-tkinter" class="tab-content active">
+
+      <!-- SUB-NAVIGATION -->
+      <nav class="subnav">
+        <a href="#tk-kostra" class="subnav__link active"><span class="subnav__num">1</span> Kostra</a>
+        <a href="#tk-kreslenie" class="subnav__link"><span class="subnav__num">2</span> Kreslenie</a>
+        <a href="#tk-vstupy" class="subnav__link"><span class="subnav__num">3</span> Vstupy</a>
+        <a href="#tk-eventy" class="subnav__link"><span class="subnav__num">4</span> Eventy</a>
+        <a href="#tk-vzorec" class="subnav__link"><span class="subnav__num">5</span> Vzorec</a>
+        <a href="#tk-animacie" class="subnav__link"><span class="subnav__num">6</span> Animácie</a>
+        <a href="#tk-objekty" class="subnav__link"><span class="subnav__num">7</span> Objekty</a>
+        <a href="#tk-subory" class="subnav__link"><span class="subnav__num">8</span> Súbory</a>
+      </nav>
+
+      <!-- SECTION 1: Základná kostra -->
+      <article class="section" id="tk-kostra" data-keywords="import tkinter root canvas mainloop kostra základná okno title pack">
+        <h2 class="section__title">
+          <span class="section__number">1</span>
+          Základná kostra programu
+        </h2>
+        <p class="section__desc">
+          Každý Tkinter program začína importmi a vytvorením základného okna s plátnom (Canvas).
+          Skratka <span class="inline-code">as tk</span> šetrí písanie – všade potom píšeš <span class="inline-code">tk.</span> namiesto <span class="inline-code">tkinter.</span>.
+        </p>
+        <div class="code-block">
+          <div class="code-block__header">
+            <span class="code-block__lang">python</span>
+            <button class="code-block__copy">Kopírovať</button>
+          </div>
+          <pre><code><span class="kw">import</span> <span class="cls">tkinter</span> <span class="kw">as</span> <span class="cls">tk</span>
+<span class="kw">import</span> <span class="cls">random</span> <span class="kw">as</span> <span class="cls">rd</span>  <span class="cm"># Ak potrebuješ náhodné čísla alebo miešanie (shuffle)</span>
+
+<span class="var">SIRKA</span> = <span class="nb">800</span>
+<span class="var">VYSKA</span> = <span class="nb">600</span>
+
+<span class="var">root</span> = <span class="cls">tk</span>.<span class="fn">Tk</span>()
+<span class="var">root</span>.<span class="fn">title</span>(<span class="st">"Môj program"</span>)  <span class="cm"># Nadpis okna (voliteľné)</span>
+<span class="var">canvas</span> = <span class="cls">tk</span>.<span class="fn">Canvas</span>(<span class="var">root</span>, <span class="param">width</span>=<span class="var">SIRKA</span>, <span class="param">height</span>=<span class="var">VYSKA</span>, <span class="param">background</span>=<span class="st">"white"</span>)
+<span class="var">canvas</span>.<span class="fn">pack</span>()
+
+<span class="cm"># ... Sem ide tvoj kód ...</span>
+
+<span class="var">root</span>.<span class="fn">mainloop</span>()</code></pre>
+        </div>
+        <div class="alert alert--tip">
+          <span class="alert__icon">💡</span>
+          <div>Konštanty <span class="inline-code">SIRKA</span> a <span class="inline-code">VYSKA</span> definuj vždy hore – budú sa ti hodiť pri výpočte stredu okna (<span class="inline-code">SIRKA // 2</span>), hraniciach pohybu, veľkosti mriežky atď.</div>
+        </div>
+      </article>
+
+      <!-- SECTION 2: Kreslenie na plátno -->
+      <article class="section" id="tk-kreslenie" data-keywords="rectangle oval line polygon text create draw kresliť obdĺžnik kruh čiara tvar delete canvas anchor fill outline tags">
+        <h2 class="section__title">
+          <span class="section__number">2</span>
+          Kreslenie na plátno (Canvas)
+        </h2>
+        <p class="section__desc">
+          Plátno (<span class="inline-code">canvas</span>) je záchytný bod pre tvoje tvary. Súradnice: X rastie doprava, Y rastie nadol.
+        </p>
+
+        <!-- Obdĺžnik -->
+        <div class="subsection">
+          <h3 class="subsection__title">Obdĺžnik – <span class="inline-code">create_rectangle</span></h3>
+          <p class="subsection__desc">
+            Vyžaduje 4 body: <span class="inline-code">(x1, y1, x2, y2)</span> – ľavý horný a pravý dolný roh.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">canvas</span>.<span class="fn">create_rectangle</span>(<span class="nb">50</span>, <span class="nb">50</span>, <span class="nb">150</span>, <span class="nb">100</span>, <span class="param">fill</span>=<span class="st">"red"</span>, <span class="param">outline</span>=<span class="st">"black"</span>, <span class="param">width</span>=<span class="nb">2</span>, <span class="param">tags</span>=<span class="st">"tvar"</span>)
+<span class="cm"># fill = farba výplne</span>
+<span class="cm"># outline = farba obrysu</span>
+<span class="cm"># width = hrúbka obrysovej čiary</span>
+<span class="cm"># tags = menovka pre skupinové mazanie</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Kruh / Elipsa -->
+        <div class="subsection">
+          <h3 class="subsection__title">Kruh / Elipsa – <span class="inline-code">create_oval</span></h3>
+          <p class="subsection__desc">
+            Zadáva sa rovnako ako obdĺžnik, do ktorého by si túto elipsu vpísal.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">canvas</span>.<span class="fn">create_oval</span>(<span class="nb">50</span>, <span class="nb">50</span>, <span class="nb">150</span>, <span class="nb">150</span>, <span class="param">fill</span>=<span class="st">"blue"</span>)</code></pre>
+          </div>
+        </div>
+
+        <!-- Čiara -->
+        <div class="subsection">
+          <h3 class="subsection__title">Čiara – <span class="inline-code">create_line</span></h3>
+          <p class="subsection__desc">
+            Spájaj ľubovoľný počet bodov. Viac ako 2 body = lámané čiary (plachta lodičky, noty, os grafu).
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Jednoduchá priamka (napr. cieľová čiara, os)</span>
+<span class="var">canvas</span>.<span class="fn">create_line</span>(<span class="nb">0</span>, <span class="nb">100</span>, <span class="nb">800</span>, <span class="nb">100</span>, <span class="param">fill</span>=<span class="st">"red"</span>, <span class="param">width</span>=<span class="nb">3</span>)
+
+<span class="cm"># Viac bodov = lámané čiary (napr. plachta lodičky)</span>
+<span class="var">canvas</span>.<span class="fn">create_line</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="var">x</span>, <span class="var">y</span>-<span class="nb">25</span>, <span class="var">x</span>+<span class="nb">10</span>, <span class="var">y</span>-<span class="nb">10</span>, <span class="var">x</span>, <span class="var">y</span>-<span class="nb">5</span>, <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">tags</span>=<span class="st">"lodicka"</span>)</code></pre>
+          </div>
+        </div>
+
+        <!-- Polygon -->
+        <div class="subsection">
+          <h3 class="subsection__title">Mnohouholník – <span class="inline-code">create_polygon</span></h3>
+          <p class="subsection__desc">
+            Uzatvorený tvar zo série bodov. Ideálny pre nepravidelné tvary (spodok lodičky, šípky).
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Spodok lodičky – trapézový tvar</span>
+<span class="var">canvas</span>.<span class="fn">create_polygon</span>(
+    <span class="var">x</span>-<span class="nb">20</span>, <span class="var">y</span>,  <span class="var">x</span>+<span class="nb">20</span>, <span class="var">y</span>,  <span class="var">x</span>+<span class="nb">10</span>, <span class="var">y</span>+<span class="nb">8</span>,  <span class="var">x</span>-<span class="nb">10</span>, <span class="var">y</span>+<span class="nb">8</span>,
+    <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">outline</span>=<span class="st">"white"</span>, <span class="param">tags</span>=<span class="st">"lodicka"</span>
+)</code></pre>
+          </div>
+        </div>
+
+        <!-- Text -->
+        <div class="subsection">
+          <h3 class="subsection__title">Text na plátne – <span class="inline-code">create_text</span></h3>
+          <p class="subsection__desc">
+            Vyžaduje len jeden bod (stred textu) X a Y. Defaultne sa text vycentruje!
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># POZOR NA ANCHOR! Ak chceš aby sa text roztiahol doprava, použi anchor="w" (West)</span>
+<span class="var">canvas</span>.<span class="fn">create_text</span>(<span class="nb">100</span>, <span class="nb">100</span>, <span class="param">text</span>=<span class="st">"Ahoj"</span>, <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">font</span>=(<span class="st">"Arial"</span>, <span class="nb">20</span>), <span class="param">anchor</span>=<span class="st">"w"</span>)</code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div><strong>Anchor:</strong> Ak nešpecifikuješ <span class="inline-code">anchor</span>, text sa centruje na daný bod. Použi <span class="inline-code">anchor="w"</span> aby sa roztiahol doprava od bodu.</div>
+          </div>
+        </div>
+
+        <!-- Mazanie -->
+        <div class="subsection">
+          <h3 class="subsection__title">Mazanie objektov – <span class="inline-code">delete</span></h3>
+          <p class="subsection__desc">
+            Mazanie je ideálne buď kompletne na všetko, alebo pomocou „tagov", alebo podľa konkrétneho ID.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">canvas</span>.<span class="fn">delete</span>(<span class="st">"all"</span>)       <span class="cm"># Zmaže úplne všetko</span>
+<span class="var">canvas</span>.<span class="fn">delete</span>(<span class="st">"tvar"</span>)      <span class="cm"># Zmaže len objekty s tags="tvar"</span>
+<span class="var">canvas</span>.<span class="fn">delete</span>(<span class="var">id_objektu</span>)  <span class="cm"># Zmaže konkrétny objekt podľa jeho ID</span></code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 3: Vstupy od používateľa -->
+      <article class="section" id="tk-vstupy" data-keywords="entry button label pack get input widget vstup políčko textové int string command">
+        <h2 class="section__title">
+          <span class="section__number">3</span>
+          Vstupy od používateľa
+        </h2>
+        <p class="section__desc">
+          Widgety <span class="inline-code">Entry</span>, <span class="inline-code">Button</span> a <span class="inline-code">Label</span> pre zadávanie údajov.
+        </p>
+
+        <!-- Vytvorenie -->
+        <div class="subsection">
+          <h3 class="subsection__title">Vytvorenie a umiestnenie</h3>
+          <div class="alert alert--danger">
+            <span class="alert__icon">🚨</span>
+            <div><strong>NAJDÔLEŽITEJŠIE PRAVIDLO:</strong> Vždy ukladaj Entry a Button do premennej a <span class="inline-code">.pack()</span> na ďalší riadok! Keby si to dal na jeden riadok (<span class="inline-code">tk.Entry().pack()</span>), uloží sa ti hodnota <span class="inline-code">None</span> a vyskočí chyba na <span class="inline-code">.get()</span>.</div>
+          </div>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Nadpis (Label nepotrebuje premennú, ak z neho nečítaš)</span>
+<span class="cls">tk</span>.<span class="fn">Label</span>(<span class="var">root</span>, <span class="param">text</span>=<span class="st">"Zadaj niečo:"</span>).<span class="fn">pack</span>()
+
+<span class="cm"># Textové políčko</span>
+<span class="var">vstup</span> = <span class="cls">tk</span>.<span class="fn">Entry</span>(<span class="var">root</span>)
+<span class="var">vstup</span>.<span class="fn">pack</span>()
+
+<span class="cm"># Tlačidlo (priradí funkciu bez zátvoriek!)</span>
+<span class="var">tlacidlo</span> = <span class="cls">tk</span>.<span class="fn">Button</span>(<span class="var">root</span>, <span class="param">text</span>=<span class="st">"Potvrdiť"</span>, <span class="param">command</span>=<span class="var">vykreslenie</span>)
+<span class="var">tlacidlo</span>.<span class="fn">pack</span>()</code></pre>
+          </div>
+        </div>
+
+        <!-- Čítanie -->
+        <div class="subsection">
+          <h3 class="subsection__title">Čítanie z Entry políčka</h3>
+          <p class="subsection__desc">
+            Políčko vráti hodnotu <strong>vždy ako reťazec (String)</strong>. Ak s tým ideš počítať, musíš to zabaliť do <span class="inline-code">int()</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">vykreslenie</span>():
+    <span class="var">cislo_z_vstupu</span> = <span class="bi">int</span>(<span class="var">vstup</span>.<span class="fn">get</span>())
+    <span class="bi">print</span>(<span class="st">"Používateľ odpovedal"</span>, <span class="var">cislo_z_vstupu</span>)</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 4: Event Handler -->
+      <article class="section" id="tk-eventy" data-keywords="bind event click klik keysym char keyboard mouse klávesa myš event.x event.y button-1 key wasd šípky">
+        <h2 class="section__title">
+          <span class="section__number">4</span>
+          Trackovanie klikov – Event Handler
+        </h2>
+        <p class="section__desc">
+          Reagovanie na hardvérové akcie (klik myšou, stlačenie klávesy).
+        </p>
+
+        <!-- Myš -->
+        <div class="subsection">
+          <h3 class="subsection__title">Myš – sledovanie kliku <span class="inline-code">&lt;Button-1&gt;</span></h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">klik</span>(<span class="param">event</span>):
+    <span class="cm"># event.x a event.y obsahujú PRESNÝ pixel kam si klikol</span>
+    <span class="var">stlpec</span> = (<span class="var">event</span>.<span class="var">x</span> - <span class="nb">20</span>) // <span class="nb">40</span>  <span class="cm"># Výpočet stĺpca podľa pixelu</span>
+    <span class="bi">print</span>(<span class="st">f"Klik na X: {</span><span class="var">event</span>.<span class="var">x</span><span class="st">}, Y: {</span><span class="var">event</span>.<span class="var">y</span><span class="st">}"</span>)
+
+<span class="var">canvas</span>.<span class="fn">bind</span>(<span class="st">"&lt;Button-1&gt;"</span>, <span class="var">klik</span>)  <span class="cm"># Myš viažeme na CANVAS!</span></code></pre>
+          </div>
+        </div>
+
+        <!-- Klávesnica -->
+        <div class="subsection">
+          <h3 class="subsection__title">Klávesnica – <span class="inline-code">event.char</span> vs <span class="inline-code">event.keysym</span></h3>
+          <p class="subsection__desc">
+            Sú dva spôsoby. <span class="inline-code">event.char</span> dáva písmeno ako string – funguje pre čísla a bežné klávesy. Pre WASD hry a špeciálne klávesy (medzera, šípky) musíš použiť <span class="inline-code">event.keysym</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># event.char – pre jednoduché prípady (hlasovanie číslicami atď.)</span>
+<span class="kw">def</span> <span class="fn">stlacenie</span>(<span class="param">event</span>):
+    <span class="kw">if</span> <span class="var">event</span>.<span class="var">char</span> == <span class="st">"1"</span>:
+        <span class="bi">print</span>(<span class="st">"Stlačil si 1"</span>)
+
+<span class="cm"># event.keysym – pre hry (WASD, šípky, medzera, Enter)</span>
+<span class="kw">def</span> <span class="fn">zmena_smeru</span>(<span class="param">event</span>):
+    <span class="var">klaves</span> = <span class="var">event</span>.<span class="var">keysym</span>.<span class="fn">lower</span>()  <span class="cm"># "w", "a", "s", "d", "space", "Return"</span>
+    <span class="kw">if</span> <span class="var">klaves</span> == <span class="st">"w"</span>:
+        <span class="bi">print</span>(<span class="st">"Hore"</span>)
+    <span class="kw">elif</span> <span class="var">klaves</span> == <span class="st">"space"</span>:
+        <span class="bi">print</span>(<span class="st">"Medzera"</span>)
+
+<span class="var">root</span>.<span class="fn">bind</span>(<span class="st">"&lt;Key&gt;"</span>, <span class="var">zmena_smeru</span>)  <span class="cm"># Klávesnicu viažeme na ROOT!</span></code></pre>
+          </div>
+          <div class="alert alert--info">
+            <span class="alert__icon">ℹ️</span>
+            <div><strong>Pravidlo bindovania:</strong> Myš (<span class="inline-code">&lt;Button-1&gt;</span>) viažeš na <span class="inline-code">canvas</span>. Klávesnicu (<span class="inline-code">&lt;Key&gt;</span>) viažeš na <span class="inline-code">root</span>.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 5: Vzorec -->
+      <article class="section" id="tk-vzorec" data-keywords="raster grid krok zaciatok index vzorec mriežka 2d tabuľka stĺpec riadok range cyklus">
+        <h2 class="section__title">
+          <span class="section__number">5</span>
+          Rovnomerné vykresľovanie do rastra
+        </h2>
+        <p class="section__desc">
+          Logika rastra pre rovnomerné rozloženie objektov v cykle.
+        </p>
+
+        <!-- 1D -->
+        <div class="subsection">
+          <h3 class="subsection__title">1D raster – jeden riadok objektov</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">ZACIATOK_X</span> = <span class="nb">20</span>
+<span class="var">VELKOST_STVORCA</span> = <span class="nb">40</span>
+<span class="var">MEDZERA</span> = <span class="nb">10</span>
+<span class="var">KROK</span> = <span class="var">VELKOST_STVORCA</span> + <span class="var">MEDZERA</span>  <span class="cm"># Teda 50!</span>
+
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="nb">5</span>):
+    <span class="var">x</span> = <span class="var">ZACIATOK_X</span> + <span class="var">i</span> * <span class="var">KROK</span>
+    <span class="var">canvas</span>.<span class="fn">create_rectangle</span>(<span class="var">x</span>, <span class="nb">100</span>, <span class="var">x</span> + <span class="var">VELKOST_STVORCA</span>, <span class="nb">100</span> + <span class="var">VELKOST_STVORCA</span>)</code></pre>
+          </div>
+        </div>
+
+        <!-- 2D -->
+        <div class="subsection">
+          <h3 class="subsection__title">2D raster – riadky a stĺpce</h3>
+          <p class="subsection__desc">
+            Vnorený cyklus pre tabuľkové rozloženie (krížovka, zasadací poriadok, šachovnica).
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">ZACIATOK_X</span> = <span class="nb">20</span>
+<span class="var">ZACIATOK_Y</span> = <span class="nb">20</span>
+<span class="var">KROK</span> = <span class="nb">50</span>          <span class="cm"># veľkosť + medzera</span>
+<span class="var">POCET_RIADKOV</span> = <span class="nb">4</span>
+<span class="var">POCET_STLPCOV</span> = <span class="nb">6</span>
+
+<span class="kw">for</span> <span class="var">rad</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="var">POCET_RIADKOV</span>):
+    <span class="kw">for</span> <span class="var">stlpec</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="var">POCET_STLPCOV</span>):
+        <span class="var">x</span> = <span class="var">ZACIATOK_X</span> + <span class="var">stlpec</span> * <span class="var">KROK</span>
+        <span class="var">y</span> = <span class="var">ZACIATOK_Y</span> + <span class="var">rad</span> * <span class="var">KROK</span>
+        <span class="var">canvas</span>.<span class="fn">create_rectangle</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="var">x</span> + <span class="nb">40</span>, <span class="var">y</span> + <span class="nb">40</span>, <span class="param">outline</span>=<span class="st">"black"</span>)</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 6: Animácie -->
+      <article class="section" id="tk-animacie" data-keywords="after move animácia pohyb fps loop herný cyklus root.after canvas.move dx dy time sleep">
+        <h2 class="section__title">
+          <span class="section__number">6</span>
+          Animácie a pohyb
+        </h2>
+        <p class="section__desc">
+          Základ každej hry alebo pohyblivej grafiky. <span class="inline-code">root.after()</span> spúšťa funkciu po určitom čase – to vytvára herný cyklus.
+        </p>
+
+        <!-- root.after -->
+        <div class="subsection">
+          <h3 class="subsection__title">Herný cyklus – <span class="inline-code">root.after()</span></h3>
+          <p class="subsection__desc">
+            Funkcia zavolá samu seba po <span class="inline-code">RYCHLOST</span> milisekundách = animačná slučka. Nikdy tu nepoužívaj <span class="inline-code">time.sleep()</span>!
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">RYCHLOST</span> = <span class="nb">50</span>  <span class="cm"># ms medzi snímkami (50ms ≈ 20 FPS)</span>
+
+<span class="kw">def</span> <span class="fn">logika</span>():
+    <span class="cm"># ... pohyb, kontrola kolízií, prekreslenie ...</span>
+
+    <span class="var">root</span>.<span class="fn">after</span>(<span class="var">RYCHLOST</span>, <span class="var">logika</span>)  <span class="cm"># naplánuj ďalší krok</span>
+
+<span class="var">logika</span>()  <span class="cm"># Spusti prvý krát PRED mainloop!</span>
+<span class="var">root</span>.<span class="fn">mainloop</span>()</code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div>Funkciu píš <strong>bez zátvoriek</strong> – odovzdávaš referenciu, nie výsledok volania.<br>
+            <span class="inline-code">root.after(50, logika)</span> ✅ &nbsp;&nbsp; <span class="inline-code">root.after(50, logika())</span> ❌</div>
+          </div>
+        </div>
+
+        <!-- canvas.move -->
+        <div class="subsection">
+          <h3 class="subsection__title">Pohyb objektu – <span class="inline-code">canvas.move()</span></h3>
+          <p class="subsection__desc">
+            Posunie existujúci objekt o zadaný počet pixelov. Oveľa efektívnejšie ako delete + create.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">id_objektu</span> = <span class="var">canvas</span>.<span class="fn">create_oval</span>(<span class="nb">0</span>, <span class="nb">0</span>, <span class="nb">40</span>, <span class="nb">40</span>, <span class="param">fill</span>=<span class="st">"blue"</span>)
+
+<span class="kw">def</span> <span class="fn">pohyb</span>():
+    <span class="var">canvas</span>.<span class="fn">move</span>(<span class="var">id_objektu</span>, <span class="nb">5</span>, <span class="nb">0</span>)  <span class="cm"># 5px doprava, 0px vertikálne</span>
+    <span class="var">root</span>.<span class="fn">after</span>(<span class="nb">50</span>, <span class="var">pohyb</span>)
+
+<span class="cm"># canvas.move(id, dx, dy)</span>
+<span class="cm"># dx > 0 = doprava,   dx < 0 = doľava</span>
+<span class="cm"># dy > 0 = nadol,     dy < 0 = nahor</span></code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 7: Práca s existujúcimi objektmi -->
+      <article class="section" id="tk-objekty" data-keywords="objekt stred bbox coords find_overlapping kolízia klik itemconfig itemcget zmena vlastnosť text farba">
+        <h2 class="section__title">
+          <span class="section__number">7</span>
+          Práca s existujúcimi objektmi
+        </h2>
+        <p class="section__desc">
+          Keď objekt už existuje na plátne, vieš zistiť jeho polohu, zmeniť vlastnosti, alebo detekovať kolízie.
+        </p>
+
+        <!-- bbox + stred -->
+        <div class="subsection">
+          <h3 class="subsection__title">Stred tvaru – <span class="inline-code">canvas.bbox()</span></h3>
+          <p class="subsection__desc">
+            Zlatý vzorec: nakresli tvar → zisti jeho bbox → vypočítaj stred → vlož text. Používa sa všade, kde treba centrovať text do políčka alebo kruhu.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">id_tvaru</span> = <span class="var">canvas</span>.<span class="fn">create_oval</span>(<span class="nb">50</span>, <span class="nb">50</span>, <span class="nb">150</span>, <span class="nb">150</span>, <span class="param">fill</span>=<span class="st">"blue"</span>)
+
+<span class="cm"># Zisti hranice objektu</span>
+<span class="var">x1</span>, <span class="var">y1</span>, <span class="var">x2</span>, <span class="var">y2</span> = <span class="var">canvas</span>.<span class="fn">bbox</span>(<span class="var">id_tvaru</span>)  <span class="cm"># funguje aj canvas.coords(id_tvaru)</span>
+
+<span class="cm"># Vypočítaj stred</span>
+<span class="var">stred_x</span> = (<span class="var">x1</span> + <span class="var">x2</span>) / <span class="nb">2</span>
+<span class="var">stred_y</span> = (<span class="var">y1</span> + <span class="var">y2</span>) / <span class="nb">2</span>
+
+<span class="cm"># Vlož text presne do stredu</span>
+<span class="var">canvas</span>.<span class="fn">create_text</span>(<span class="var">stred_x</span>, <span class="var">stred_y</span>, <span class="param">text</span>=<span class="st">"A"</span>, <span class="param">font</span>=(<span class="st">"Arial"</span>, <span class="nb">20</span>, <span class="st">"bold"</span>))</code></pre>
+          </div>
+        </div>
+
+        <!-- find_overlapping - klik -->
+        <div class="subsection">
+          <h3 class="subsection__title">Klik na konkrétny objekt – <span class="inline-code">find_overlapping()</span></h3>
+          <p class="subsection__desc">
+            Vráti zoznam ID objektov na daných súradniciach. Používa sa keď klikaš na taniere, bunky krížovky alebo iné tvary na canvase.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">id_taniera</span> = <span class="var">canvas</span>.<span class="fn">create_oval</span>(<span class="nb">50</span>, <span class="nb">50</span>, <span class="nb">150</span>, <span class="nb">150</span>, <span class="param">fill</span>=<span class="st">"blue"</span>)
+<span class="var">taniare</span> = {<span class="var">id_taniera</span>: <span class="st">"A"</span>}  <span class="cm"># slovník: id → hodnota</span>
+
+<span class="kw">def</span> <span class="fn">klik</span>(<span class="param">event</span>):
+    <span class="var">nalez</span> = <span class="var">canvas</span>.<span class="fn">find_overlapping</span>(<span class="var">event</span>.<span class="var">x</span>, <span class="var">event</span>.<span class="var">y</span>, <span class="var">event</span>.<span class="var">x</span>, <span class="var">event</span>.<span class="var">y</span>)
+    <span class="kw">for</span> <span class="var">objekt_id</span> <span class="kw">in</span> <span class="var">nalez</span>:
+        <span class="kw">if</span> <span class="var">objekt_id</span> <span class="kw">in</span> <span class="var">taniare</span>:
+            <span class="bi">print</span>(<span class="st">f"Klikol si na: {</span><span class="var">taniare</span>[<span class="var">objekt_id</span>]<span class="st">}"</span>)
+
+<span class="var">canvas</span>.<span class="fn">bind</span>(<span class="st">"&lt;Button-1&gt;"</span>, <span class="var">klik</span>)</code></pre>
+          </div>
+        </div>
+
+        <!-- find_overlapping - kolizia -->
+        <div class="subsection">
+          <h3 class="subsection__title">Detekcia kolízie – <span class="inline-code">find_overlapping()</span> + <span class="inline-code">bbox()</span></h3>
+          <p class="subsection__desc">
+            Zisti bbox pohybujúceho sa hrdinu, potom nájdi čo s ním koliduje.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">logika</span>():
+    <span class="var">hitbox</span> = <span class="var">canvas</span>.<span class="fn">bbox</span>(<span class="var">id_hrdinu</span>)              <span class="cm"># (x1, y1, x2, y2)</span>
+    <span class="var">kolizie</span> = <span class="var">canvas</span>.<span class="fn">find_overlapping</span>(*<span class="var">hitbox</span>)  <span class="cm"># * rozbalí tuple na 4 argumenty</span>
+    <span class="kw">for</span> <span class="var">objekt_id</span> <span class="kw">in</span> <span class="var">kolizie</span>:
+        <span class="kw">if</span> <span class="var">objekt_id</span> != <span class="var">id_hrdinu</span>:  <span class="cm"># ignoruj seba samého</span>
+            <span class="var">canvas</span>.<span class="fn">delete</span>(<span class="var">objekt_id</span>)
+    <span class="var">root</span>.<span class="fn">after</span>(<span class="nb">50</span>, <span class="var">logika</span>)</code></pre>
+          </div>
+        </div>
+
+        <!-- itemconfig / itemcget -->
+        <div class="subsection">
+          <h3 class="subsection__title">Zmena vlastností – <span class="inline-code">itemconfig()</span> a <span class="inline-code">itemcget()</span></h3>
+          <p class="subsection__desc">
+            Zmeň text, farbu alebo inú vlastnosť existujúceho objektu bez mazania a prekreslenia. Ideálne pre pohybujúce sa texty (električka, skóre).
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">id_textu</span> = <span class="var">canvas</span>.<span class="fn">create_text</span>(<span class="nb">200</span>, <span class="nb">100</span>, <span class="param">text</span>=<span class="st">"Pôvodný"</span>, <span class="param">fill</span>=<span class="st">"white"</span>)
+
+<span class="cm"># Zmena vlastností existujúceho objektu</span>
+<span class="var">canvas</span>.<span class="fn">itemconfig</span>(<span class="var">id_textu</span>, <span class="param">text</span>=<span class="st">"Nový text"</span>, <span class="param">fill</span>=<span class="st">"red"</span>)
+
+<span class="cm"># Prečítanie aktuálnej hodnoty vlastnosti</span>
+<span class="var">aktualny_text</span> = <span class="var">canvas</span>.<span class="fn">itemcget</span>(<span class="var">id_textu</span>, <span class="st">"text"</span>)
+<span class="bi">print</span>(<span class="var">aktualny_text</span>)  <span class="cm"># "Nový text"</span></code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 8: Práca so súbormi -->
+      <article class="section" id="tk-subory" data-keywords="súbor readlines open txt csv encoding utf-8 windows-1250 split riadok čítanie write zápis append pridávanie read mód režim fw fr fv">
+        <h2 class="section__title">
+          <span class="section__number">8</span>
+          Práca so súbormi
+        </h2>
+        <p class="section__desc">
+          Súbory môžeš otvárať na čítanie, zápis alebo pridávanie. Režim určuješ druhým parametrom v <span class="inline-code">open()</span>. Každý riadok obsahuje <span class="inline-code">\n</span> na konci – vždy použi <span class="inline-code">.strip()</span>.
+        </p>
+
+        <!-- Textový súbor -->
+        <div class="subsection">
+          <h3 class="subsection__title">Textový súbor – riadok po riadku</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">VSTUP</span> = <span class="st">"data.txt"</span>
+
+<span class="kw">with</span> <span class="bi">open</span>(<span class="var">VSTUP</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()  <span class="cm"># list riadkov, každý má \n na konci</span>
+
+<span class="kw">for</span> <span class="var">riadok</span> <span class="kw">in</span> <span class="var">riadky</span>:
+    <span class="var">cisty</span> = <span class="var">riadok</span>.<span class="fn">strip</span>()  <span class="cm"># odstráni \n aj okolité medzery</span>
+    <span class="bi">print</span>(<span class="var">cisty</span>)
+
+<span class="cm"># Prvý riadok zvlášť (napr. hlavička / max kapacita)</span>
+<span class="var">hlavicka</span> = <span class="var">riadky</span>[<span class="nb">0</span>].<span class="fn">strip</span>()
+<span class="var">zvysok</span>   = <span class="var">riadky</span>[<span class="nb">1</span>:]  <span class="cm"># všetky okrem prvého</span></code></pre>
+          </div>
+        </div>
+
+        <!-- CSV -->
+        <div class="subsection">
+          <h3 class="subsection__title">CSV zo súboru (Excel export)</h3>
+          <p class="subsection__desc">
+            CSV exportované z Excelu majú <span class="inline-code">encoding="windows-1250"</span> a stĺpce oddelené <span class="inline-code">;</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">with</span> <span class="bi">open</span>(<span class="st">"subor.csv"</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"windows-1250"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+
+<span class="cm"># Rozdeliť každý riadok podľa stredníka → list stĺpcov</span>
+<span class="var">spracovane</span> = [<span class="var">riadok</span>.<span class="fn">strip</span>().<span class="fn">split</span>(<span class="st">";"</span>) <span class="kw">for</span> <span class="var">riadok</span> <span class="kw">in</span> <span class="var">riadky</span>]
+
+<span class="kw">for</span> <span class="var">zaznam</span> <span class="kw">in</span> <span class="var">spracovane</span>:
+    <span class="var">priezvisko</span> = <span class="var">zaznam</span>[<span class="nb">0</span>]
+    <span class="var">meno</span>       = <span class="var">zaznam</span>[<span class="nb">1</span>]</code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div><strong>Encoding:</strong> Vlastnoručne vytvorené <span class="inline-code">.txt</span> → <span class="inline-code">utf-8</span>. CSV export z Excelu → <span class="inline-code">windows-1250</span>.</div>
+          </div>
+        </div>
+
+        <!-- Režimy otvárania -->
+        <div class="subsection">
+          <h3 class="subsection__title">Všetky režimy otvárania – <span class="inline-code">"r"</span>, <span class="inline-code">"w"</span>, <span class="inline-code">"a"</span></h3>
+          <p class="subsection__desc">
+            Druhý parameter v <span class="inline-code">open()</span> určuje, čo sa s daným súborom stane. Toto je kľúčový rozdiel!
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># "r" = READ (čítanie) – DEFAULT režim</span>
+<span class="cm"># Súbor MUSÍ existovať, inak vyhodí FileNotFoundError</span>
+<span class="cm"># Nič do neho nezapíšeš, len čítaš</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+
+<span class="cm"># "w" = WRITE (zápis) – POZOR: ZMAŽE celý obsah súboru!</span>
+<span class="cm"># Ak súbor neexistuje, vytvorí ho</span>
+<span class="cm"># Ak existuje, VYMAŽE všetko a začne odznova</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Tento riadok prepíše všetko\n"</span>)
+
+<span class="cm"># "a" = APPEND (pridávanie) – NEPREPÍŠE nič!</span>
+<span class="cm"># Ak súbor neexistuje, vytvorí ho</span>
+<span class="cm"># Ak existuje, PRIDÁ text na koniec (pod posledný riadok)</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"a"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Toto sa pridá pod existujúce riadky\n"</span>)</code></pre>
+          </div>
+          <div class="alert alert--danger">
+            <span class="alert__icon">🚨</span>
+            <div><strong>NAJVÄČŠÍ ROZDIEL:</strong> <span class="inline-code">"w"</span> = vymaže súbor a zapíše odznova. <span class="inline-code">"a"</span> = ponechá starý obsah a pridá nové riadky na koniec. Ak chceš zbierať hlasy, objednávky alebo výsledky, <strong>vždy použi <span class="inline-code">"a"</span></strong>!</div>
+          </div>
+        </div>
+
+        <!-- write() vs writelines() -->
+        <div class="subsection">
+          <h3 class="subsection__title">Zápis do súboru – <span class="inline-code">write()</span> vs <span class="inline-code">writelines()</span></h3>
+          <p class="subsection__desc">
+            <span class="inline-code">write()</span> zapíše <strong>jeden reťazec</strong>. Automaticky nepridáva nový riadok – musíš sám dať <span class="inline-code">\n</span>!
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># write() – zapíše PRESNE to, čo mu dáš</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"vystup.txt"</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Prvý riadok\n"</span>)
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Druhý riadok\n"</span>)
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"Kód: {</span><span class="var">kod</span><span class="st">} Jedlo: {</span><span class="var">nazov</span><span class="st">}\n"</span>)
+
+<span class="cm"># writelines() – zapíše list reťazcov naraz</span>
+<span class="var">zoznam</span> = [<span class="st">"riadok 1\n"</span>, <span class="st">"riadok 2\n"</span>, <span class="st">"riadok 3\n"</span>]
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"vystup.txt"</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">writelines</span>(<span class="var">zoznam</span>)</code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div><strong>\n je povinný!</strong> <span class="inline-code">fw.write("text")</span> nedá nový riadok. Musíš písať <span class="inline-code">fw.write("text\n")</span>, inak sa ti všetko nalepí do jedného riadku.</div>
+          </div>
+        </div>
+
+        <!-- Praktický vzor: vyprázdniť + appendovať -->
+        <div class="subsection">
+          <h3 class="subsection__title">Praktický vzor – vyprázdni a potom zbieraj</h3>
+          <p class="subsection__desc">
+            Typický postup v úlohách: na začiatku programu súbor <strong>vyprázdniš</strong> cez <span class="inline-code">"w"</span>, potom počas behu <strong>pridávaš</strong> cez <span class="inline-code">"a"</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">SUBOR</span> = <span class="st">"vysledky.txt"</span>
+
+<span class="cm"># Na začiatku programu: "w" + pass = vytvorí/vyprázdni súbor</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="var">SUBOR</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="kw">pass</span>
+
+<span class="cm"># Počas behu: "a" pridáva riadky pod seba</span>
+<span class="kw">def</span> <span class="fn">zapisat</span>(<span class="param">text</span>):
+    <span class="kw">with</span> <span class="bi">open</span>(<span class="var">SUBOR</span>, <span class="st">"a"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+        <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"{</span><span class="var">text</span><span class="st">}\n"</span>)</code></pre>
+          </div>
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div>Presne tento vzor si použil v úlohe <strong>Výber jedla</strong> – najprv <span class="inline-code">open(SUBOR, "w")</span> + <span class="inline-code">pass</span> na vyčistenie, potom <span class="inline-code">open(SUBOR, "a")</span> v <span class="inline-code">pisac()</span> na postupný zápis kliknutých jedál.</div>
+          </div>
+        </div>
+      </article>
+
+    </div><!-- /tab-tkinter -->
+
+    <!-- ========================================== -->
+    <!-- TAB: KONZOLOVÉ ÚLOHY                       -->
+    <!-- ========================================== -->
+    <div id="tab-konzola" class="tab-content">
+      <nav class="subnav">
+        <span class="subnav__empty">Zatiaľ žiadne sekcie</span>
+      </nav>
+      <div class="placeholder">
+        <span class="placeholder__icon">💻</span>
+        <h2 class="placeholder__title">Konzolové úlohy</h2>
+        <p class="placeholder__desc">Tu budú poznámky ku konzolovým úlohám. Pridaj obsah priamo do <span class="inline-code">index.html</span> do tohto bloku.</p>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB: EXCEL / WORD                          -->
+    <!-- ========================================== -->
+    <div id="tab-excel" class="tab-content">
+      <nav class="subnav">
+        <span class="subnav__empty">Zatiaľ žiadne sekcie</span>
+      </nav>
+      <div class="placeholder">
+        <span class="placeholder__icon">📊</span>
+        <h2 class="placeholder__title">Excel / Word</h2>
+        <p class="placeholder__desc">Tu budú poznámky k práci s Excel a Word. Pridaj obsah priamo do <span class="inline-code">index.html</span> do tohto bloku.</p>
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- TAB: GRAFIKA                               -->
+    <!-- ========================================== -->
+    <div id="tab-grafika" class="tab-content">
+      <nav class="subnav">
+        <span class="subnav__empty">Zatiaľ žiadne sekcie</span>
+      </nav>
+      <div class="placeholder">
+        <span class="placeholder__icon">🎨</span>
+        <h2 class="placeholder__title">Grafika</h2>
+        <p class="placeholder__desc">Tu budú poznámky ku grafike. Pridaj obsah priamo do <span class="inline-code">index.html</span> do tohto bloku.</p>
+      </div>
+    </div>
+
+    </main>
+
+  </div><!-- /layout -->
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    Informatika – Príručka · Vytvorené s 💜
+  </footer>
+
+  <script src="script.js?v=7"></script>
+</body>
+</html>
