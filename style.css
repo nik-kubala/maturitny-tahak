@@ -740,6 +740,15 @@ body::before {
   border-bottom: 2px solid var(--accent-warning);
 }
 
+.sidebar__group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.sidebar__group[hidden] {
+  display: none;
+}
+
 .sidebar__section-label {
   font-size: 0.6rem;
   font-weight: 700;

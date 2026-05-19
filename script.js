@@ -52,8 +52,33 @@ function initTabs() {
       if (target) {
         target.classList.add("active");
       }
+
+      // Prepneme sidebar skupinu podľa aktívneho tabu
+      syncSidebarToTab(targetId);
+
+      // Reaplikujeme aktuálny filter na nový tab (aby search platil aj po prepnutí)
+      const searchInput = document.getElementById("sidebar-search");
+      if (searchInput) {
+        searchInput.dispatchEvent(new Event("input"));
+      }
     });
   });
+}
+
+function syncSidebarToTab(tabId) {
+  const groups = document.querySelectorAll(".sidebar__group");
+  groups.forEach((group) => {
+    if (group.dataset.tab === tabId) {
+      group.hidden = false;
+    } else {
+      group.hidden = true;
+    }
+  });
+}
+
+function getActiveTabId() {
+  const activeTab = document.querySelector(".tab-content.active");
+  return activeTab ? activeTab.id : null;
 }
 
 // ========== SUB-NAVIGATION (Anchor links within tabs) ==========
@@ -305,71 +330,78 @@ function highlightText(root, query) {
   });
 }
 
+function getActiveSidebarLinks() {
+  const activeGroup = document.querySelector(".sidebar__group:not([hidden])");
+  if (!activeGroup) return [];
+  return activeGroup.querySelectorAll(".sidebar__link");
+}
+
+function getActiveSections() {
+  const activeTab = document.querySelector(".tab-content.active");
+  if (!activeTab) return [];
+  return activeTab.querySelectorAll(".section");
+}
+
 function initSidebar() {
   const searchInput = document.getElementById("sidebar-search");
-  const sections = document.querySelectorAll(".section");
-  const sidebarLinks = document.querySelectorAll(".sidebar__link");
   const scrollTopBtn = document.getElementById("scroll-top-btn");
   const scrollBotBtn = document.getElementById("scroll-bot-btn");
 
-  // Hľadanie
+  // Inicializuj sidebar pre aktívny tab
+  syncSidebarToTab(getActiveTabId());
+
+  // Hľadanie – pracuje len so sekciami a linkmi aktívneho tabu
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       const query = e.target.value.trim();
       const queryLower = query.toLowerCase();
 
+      const sections = getActiveSections();
+      const activeGroup = document.querySelector(
+        ".sidebar__group:not([hidden])",
+      );
+
       sections.forEach((section) => {
         const keywords = section.getAttribute("data-keywords") || "";
         const allText = section.textContent.toLowerCase();
-        const titleText = section
-          .querySelector(".section__title")
-          .textContent.toLowerCase();
+        const titleEl = section.querySelector(".section__title");
+        const titleText = titleEl ? titleEl.textContent.toLowerCase() : "";
 
-        let sectionMatches = false;
-
-        if (
+        const sectionMatches =
           query === "" ||
           titleText.indexOf(queryLower) !== -1 ||
           keywords.indexOf(queryLower) !== -1 ||
-          allText.indexOf(queryLower) !== -1
-        ) {
-          sectionMatches = true;
-        }
+          allText.indexOf(queryLower) !== -1;
+
+        const link = activeGroup
+          ? activeGroup.querySelector(
+              `.sidebar__link[href="#${section.id}"]`,
+            )
+          : null;
 
         if (sectionMatches) {
           section.style.display = "";
-          const link = document.querySelector(
-            `.sidebar__link[href="#${section.id}"]`,
-          );
           if (link) link.style.display = "";
 
-          // Najprv aplikujeme zvýraznenie (TOTO PREPÍŠE VNÚTORNÝ HTML DOM!)
           highlightText(section, query);
 
-          // Keďže sa DOM prepísal čerstvou kópiou pre zvýraznenie, musíme podsekcie skryť až TERAZ
-          if (query !== "") {
-            // Filtrujeme podsekcie VŽDY, okrem prípadu keď query sedí priamo do nadpisu sekcie
-            // (napr. "Kreslenie" → ukáž všetko v Kreslení)
-            if (titleText.indexOf(queryLower) === -1) {
-              const subsections = section.querySelectorAll(".subsection");
-              subsections.forEach((sub) => {
-                const subText = sub.textContent.toLowerCase();
-                if (subText.indexOf(queryLower) !== -1) {
-                  sub.style.display = "";
-                } else {
-                  sub.style.display = "none";
-                }
-              });
-            }
+          if (query !== "" && titleText.indexOf(queryLower) === -1) {
+            const subsections = section.querySelectorAll(".subsection");
+            subsections.forEach((sub) => {
+              const subText = sub.textContent.toLowerCase();
+              sub.style.display =
+                subText.indexOf(queryLower) !== -1 ? "" : "none";
+            });
+          } else {
+            // Reset podsekcií (zobraziť všetky)
+            section
+              .querySelectorAll(".subsection")
+              .forEach((sub) => (sub.style.display = ""));
           }
         } else {
           section.style.display = "none";
-          const link = document.querySelector(
-            `.sidebar__link[href="#${section.id}"]`,
-          );
           if (link) link.style.display = "none";
 
-          // Na skrytých sekciách zmažeme zvýraznenie (vrátime pôvodný DOM)
           highlightText(section, "");
         }
       });
@@ -389,10 +421,14 @@ function initSidebar() {
     });
   }
 
-  // Kliknutie na sidebar link (presun a označiť)
-  sidebarLinks.forEach((link) => {
-    link.addEventListener("click", (e) => {
+  // Kliknutie na sidebar link – delegovanie cez sidebar (funguje aj pre nové linky)
+  const sidebar = document.querySelector(".sidebar");
+  if (sidebar) {
+    sidebar.addEventListener("click", (e) => {
+      const link = e.target.closest(".sidebar__link");
+      if (!link) return;
       e.preventDefault();
+
       const targetId = link.getAttribute("href").substring(1);
       const target = document.getElementById(targetId);
       if (target) {
@@ -402,12 +438,13 @@ function initSidebar() {
         fastScrollTo(top);
       }
 
-      sidebarLinks.forEach((l) => l.classList.remove("active"));
+      const links = getActiveSidebarLinks();
+      links.forEach((l) => l.classList.remove("active"));
       link.classList.add("active");
     });
-  });
+  }
 
-  // Scroll spy pre sidebar
+  // Scroll spy pre sidebar – pracuje len s linkmi aktívneho tabu
   let ticking = false;
   window.addEventListener("scroll", () => {
     if (!ticking) {
@@ -415,10 +452,11 @@ function initSidebar() {
         const targetOffset = 150;
         let currentSectionId = null;
 
-        sidebarLinks.forEach((link) => {
+        const links = getActiveSidebarLinks();
+        links.forEach((link) => {
           const targetId = link.getAttribute("href").substring(1);
           const section = document.getElementById(targetId);
-          if (section) {
+          if (section && section.style.display !== "none") {
             const rect = section.getBoundingClientRect();
             if (rect.top <= targetOffset) {
               currentSectionId = targetId;
@@ -427,9 +465,9 @@ function initSidebar() {
         });
 
         if (currentSectionId) {
-          sidebarLinks.forEach((l) => l.classList.remove("active"));
-          const currentLink = document.querySelector(
-            `.sidebar__link[href="#${currentSectionId}"]`,
+          links.forEach((l) => l.classList.remove("active"));
+          const currentLink = Array.from(links).find(
+            (l) => l.getAttribute("href") === `#${currentSectionId}`,
           );
           if (currentLink) {
             currentLink.classList.add("active");

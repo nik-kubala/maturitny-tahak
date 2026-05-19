@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Informatika – Príručka</title>
-  <meta name="description" content="Rýchla príručka k informatike – Tkinter, konzolové úlohy, Excel/Word, grafika.">
-  <link rel="stylesheet" href="style.css?v=2">
+  <meta name="description" content="Rýchla príručka k informatike – Tkinter a konzolové úlohy.">
+  <link rel="stylesheet" href="style.css?v=3">
 </head>
 <body>
 
@@ -21,8 +21,6 @@
     <ul class="tabs__list">
       <li><button class="tabs__btn active" data-tab="tab-tkinter"><span class="tabs__icon">🖼️</span> Tkinter</button></li>
       <li><button class="tabs__btn" data-tab="tab-konzola"><span class="tabs__icon">💻</span> Konzolové úlohy</button></li>
-      <li><button class="tabs__btn" data-tab="tab-excel"><span class="tabs__icon">📊</span> Excel / Word</button></li>
-      <li><button class="tabs__btn" data-tab="tab-grafika"><span class="tabs__icon">🎨</span> Grafika</button></li>
     </ul>
   </nav>
 
@@ -32,17 +30,37 @@
     <!-- ===== SIDEBAR ===== -->
     <aside class="sidebar">
       <input type="search" id="sidebar-search" class="sidebar__search" placeholder="🔍 Hľadaj…" autocomplete="off">
-      <p class="sidebar__section-label">Tkinter</p>
-      <nav class="sidebar__nav">
-        <a href="#tk-kostra"    class="sidebar__link active"><span class="sidebar__num">1</span> Kostra</a>
-        <a href="#tk-kreslenie" class="sidebar__link"><span class="sidebar__num">2</span> Kreslenie</a>
-        <a href="#tk-vstupy"    class="sidebar__link"><span class="sidebar__num">3</span> Vstupy</a>
-        <a href="#tk-eventy"    class="sidebar__link"><span class="sidebar__num">4</span> Eventy</a>
-        <a href="#tk-vzorec"    class="sidebar__link"><span class="sidebar__num">5</span> Vzorec</a>
-        <a href="#tk-animacie"  class="sidebar__link"><span class="sidebar__num">6</span> Animácie</a>
-        <a href="#tk-objekty"   class="sidebar__link"><span class="sidebar__num">7</span> Objekty</a>
-        <a href="#tk-subory"    class="sidebar__link"><span class="sidebar__num">8</span> Súbory</a>
-      </nav>
+
+      <!-- Sidebar pre Tkinter -->
+      <div class="sidebar__group" data-tab="tab-tkinter">
+        <p class="sidebar__section-label">Tkinter</p>
+        <nav class="sidebar__nav">
+          <a href="#tk-kostra"    class="sidebar__link active"><span class="sidebar__num">1</span> Kostra</a>
+          <a href="#tk-kreslenie" class="sidebar__link"><span class="sidebar__num">2</span> Kreslenie</a>
+          <a href="#tk-vstupy"    class="sidebar__link"><span class="sidebar__num">3</span> Vstupy</a>
+          <a href="#tk-eventy"    class="sidebar__link"><span class="sidebar__num">4</span> Eventy</a>
+          <a href="#tk-vzorec"    class="sidebar__link"><span class="sidebar__num">5</span> Vzorec</a>
+          <a href="#tk-animacie"  class="sidebar__link"><span class="sidebar__num">6</span> Animácie</a>
+          <a href="#tk-objekty"   class="sidebar__link"><span class="sidebar__num">7</span> Objekty</a>
+          <a href="#tk-subory"    class="sidebar__link"><span class="sidebar__num">8</span> Súbory</a>
+        </nav>
+      </div>
+
+      <!-- Sidebar pre Konzolu -->
+      <div class="sidebar__group" data-tab="tab-konzola" hidden>
+        <p class="sidebar__section-label">Konzola</p>
+        <nav class="sidebar__nav">
+          <a href="#kz-kostra"   class="sidebar__link active"><span class="sidebar__num">1</span> Kostra</a>
+          <a href="#kz-subory"   class="sidebar__link"><span class="sidebar__num">2</span> Súbory</a>
+          <a href="#kz-retazce"  class="sidebar__link"><span class="sidebar__num">3</span> Reťazce</a>
+          <a href="#kz-listy"    class="sidebar__link"><span class="sidebar__num">4</span> Listy</a>
+          <a href="#kz-dict"     class="sidebar__link"><span class="sidebar__num">5</span> Slovníky</a>
+          <a href="#kz-minmax"   class="sidebar__link"><span class="sidebar__num">6</span> Min/Max</a>
+          <a href="#kz-cykly"    class="sidebar__link"><span class="sidebar__num">7</span> Cykly</a>
+          <a href="#kz-random"   class="sidebar__link"><span class="sidebar__num">8</span> Random/Set</a>
+        </nav>
+      </div>
+
       <div class="sidebar__divider"></div>
       <div class="sidebar__bottom">
         <button class="sidebar__scroll-btn" id="scroll-top-btn">↑ Vrch</button>
@@ -153,18 +171,18 @@
         <div class="subsection">
           <h3 class="subsection__title">Čiara – <span class="inline-code">create_line</span></h3>
           <p class="subsection__desc">
-            Spájaj ľubovoľný počet bodov. Viac ako 2 body = lámané čiary (plachta lodičky, noty, os grafu).
+            Spájaj ľubovoľný počet bodov. Viac ako 2 body = lámané čiary.
           </p>
           <div class="code-block">
             <div class="code-block__header">
               <span class="code-block__lang">python</span>
               <button class="code-block__copy">Kopírovať</button>
             </div>
-            <pre><code><span class="cm"># Jednoduchá priamka (napr. cieľová čiara, os)</span>
+            <pre><code><span class="cm"># Jednoduchá priamka (napr. os)</span>
 <span class="var">canvas</span>.<span class="fn">create_line</span>(<span class="nb">0</span>, <span class="nb">100</span>, <span class="nb">800</span>, <span class="nb">100</span>, <span class="param">fill</span>=<span class="st">"red"</span>, <span class="param">width</span>=<span class="nb">3</span>)
 
-<span class="cm"># Viac bodov = lámané čiary (napr. plachta lodičky)</span>
-<span class="var">canvas</span>.<span class="fn">create_line</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="var">x</span>, <span class="var">y</span>-<span class="nb">25</span>, <span class="var">x</span>+<span class="nb">10</span>, <span class="var">y</span>-<span class="nb">10</span>, <span class="var">x</span>, <span class="var">y</span>-<span class="nb">5</span>, <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">tags</span>=<span class="st">"lodicka"</span>)</code></pre>
+<span class="cm"># Viac bodov = lámaná čiara (napr. zubatá línia)</span>
+<span class="var">canvas</span>.<span class="fn">create_line</span>(<span class="nb">100</span>, <span class="nb">200</span>, <span class="nb">150</span>, <span class="nb">150</span>, <span class="nb">200</span>, <span class="nb">200</span>, <span class="nb">250</span>, <span class="nb">150</span>, <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">width</span>=<span class="nb">2</span>, <span class="param">tags</span>=<span class="st">"ciara"</span>)</code></pre>
           </div>
         </div>
 
@@ -172,17 +190,17 @@
         <div class="subsection">
           <h3 class="subsection__title">Mnohouholník – <span class="inline-code">create_polygon</span></h3>
           <p class="subsection__desc">
-            Uzatvorený tvar zo série bodov. Ideálny pre nepravidelné tvary (spodok lodičky, šípky).
+            Uzatvorený tvar zo série bodov. Ideálny pre nepravidelné tvary (napr. šípky).
           </p>
           <div class="code-block">
             <div class="code-block__header">
               <span class="code-block__lang">python</span>
               <button class="code-block__copy">Kopírovať</button>
             </div>
-            <pre><code><span class="cm"># Spodok lodičky – trapézový tvar</span>
+            <pre><code><span class="cm"># Nepravidelný mnohouholník</span>
 <span class="var">canvas</span>.<span class="fn">create_polygon</span>(
     <span class="var">x</span>-<span class="nb">20</span>, <span class="var">y</span>,  <span class="var">x</span>+<span class="nb">20</span>, <span class="var">y</span>,  <span class="var">x</span>+<span class="nb">10</span>, <span class="var">y</span>+<span class="nb">8</span>,  <span class="var">x</span>-<span class="nb">10</span>, <span class="var">y</span>+<span class="nb">8</span>,
-    <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">outline</span>=<span class="st">"white"</span>, <span class="param">tags</span>=<span class="st">"lodicka"</span>
+    <span class="param">fill</span>=<span class="st">"black"</span>, <span class="param">outline</span>=<span class="st">"white"</span>, <span class="param">tags</span>=<span class="st">"tvar"</span>
 )</code></pre>
           </div>
         </div>
@@ -371,7 +389,7 @@
         <div class="subsection">
           <h3 class="subsection__title">2D raster – riadky a stĺpce</h3>
           <p class="subsection__desc">
-            Vnorený cyklus pre tabuľkové rozloženie (krížovka, zasadací poriadok, šachovnica).
+            Vnorený cyklus pre tabuľkové rozloženie (napr. mriežka, šachovnica).
           </p>
           <div class="code-block">
             <div class="code-block__header">
@@ -494,21 +512,21 @@
         <div class="subsection">
           <h3 class="subsection__title">Klik na konkrétny objekt – <span class="inline-code">find_overlapping()</span></h3>
           <p class="subsection__desc">
-            Vráti zoznam ID objektov na daných súradniciach. Používa sa keď klikaš na taniere, bunky krížovky alebo iné tvary na canvase.
+            Vráti zoznam ID objektov na daných súradniciach. Používa sa, keď chceš zistiť, na ktorý konkrétny tvar na plátne si klikol.
           </p>
           <div class="code-block">
             <div class="code-block__header">
               <span class="code-block__lang">python</span>
               <button class="code-block__copy">Kopírovať</button>
             </div>
-            <pre><code><span class="var">id_taniera</span> = <span class="var">canvas</span>.<span class="fn">create_oval</span>(<span class="nb">50</span>, <span class="nb">50</span>, <span class="nb">150</span>, <span class="nb">150</span>, <span class="param">fill</span>=<span class="st">"blue"</span>)
-<span class="var">taniare</span> = {<span class="var">id_taniera</span>: <span class="st">"A"</span>}  <span class="cm"># slovník: id → hodnota</span>
+            <pre><code><span class="var">id_objektu</span> = <span class="var">canvas</span>.<span class="fn">create_oval</span>(<span class="nb">50</span>, <span class="nb">50</span>, <span class="nb">150</span>, <span class="nb">150</span>, <span class="param">fill</span>=<span class="st">"blue"</span>)
+<span class="var">objekty</span> = {<span class="var">id_objektu</span>: <span class="st">"A"</span>}  <span class="cm"># slovník: id → hodnota</span>
 
 <span class="kw">def</span> <span class="fn">klik</span>(<span class="param">event</span>):
     <span class="var">nalez</span> = <span class="var">canvas</span>.<span class="fn">find_overlapping</span>(<span class="var">event</span>.<span class="var">x</span>, <span class="var">event</span>.<span class="var">y</span>, <span class="var">event</span>.<span class="var">x</span>, <span class="var">event</span>.<span class="var">y</span>)
     <span class="kw">for</span> <span class="var">objekt_id</span> <span class="kw">in</span> <span class="var">nalez</span>:
-        <span class="kw">if</span> <span class="var">objekt_id</span> <span class="kw">in</span> <span class="var">taniare</span>:
-            <span class="bi">print</span>(<span class="st">f"Klikol si na: {</span><span class="var">taniare</span>[<span class="var">objekt_id</span>]<span class="st">}"</span>)
+        <span class="kw">if</span> <span class="var">objekt_id</span> <span class="kw">in</span> <span class="var">objekty</span>:
+            <span class="bi">print</span>(<span class="st">f"Klikol si na: {</span><span class="var">objekty</span>[<span class="var">objekt_id</span>]<span class="st">}"</span>)
 
 <span class="var">canvas</span>.<span class="fn">bind</span>(<span class="st">"&lt;Button-1&gt;"</span>, <span class="var">klik</span>)</code></pre>
           </div>
@@ -539,7 +557,7 @@
         <div class="subsection">
           <h3 class="subsection__title">Zmena vlastností – <span class="inline-code">itemconfig()</span> a <span class="inline-code">itemcget()</span></h3>
           <p class="subsection__desc">
-            Zmeň text, farbu alebo inú vlastnosť existujúceho objektu bez mazania a prekreslenia. Ideálne pre pohybujúce sa texty (električka, skóre).
+            Zmeň text, farbu alebo inú vlastnosť existujúceho objektu bez mazania a prekreslenia. Ideálne pre pohybujúce sa texty.
           </p>
           <div class="code-block">
             <div class="code-block__header">
@@ -668,7 +686,7 @@
 <span class="kw">with</span> <span class="bi">open</span>(<span class="st">"vystup.txt"</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
     <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Prvý riadok\n"</span>)
     <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Druhý riadok\n"</span>)
-    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"Kód: {</span><span class="var">kod</span><span class="st">} Jedlo: {</span><span class="var">nazov</span><span class="st">}\n"</span>)
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"ID: {</span><span class="var">id_polozky</span><span class="st">} Názov: {</span><span class="var">nazov</span><span class="st">}\n"</span>)
 
 <span class="cm"># writelines() – zapíše list reťazcov naraz</span>
 <span class="var">zoznam</span> = [<span class="st">"riadok 1\n"</span>, <span class="st">"riadok 2\n"</span>, <span class="st">"riadok 3\n"</span>]
@@ -705,7 +723,7 @@
           </div>
           <div class="alert alert--tip">
             <span class="alert__icon">💡</span>
-            <div>Presne tento vzor si použil v úlohe <strong>Výber jedla</strong> – najprv <span class="inline-code">open(SUBOR, "w")</span> + <span class="inline-code">pass</span> na vyčistenie, potom <span class="inline-code">open(SUBOR, "a")</span> v <span class="inline-code">pisac()</span> na postupný zápis kliknutých jedál.</div>
+            <div>Napríklad pri ukladaní výsledkov: najprv <span class="inline-code">open(SUBOR, "w")</span> + <span class="inline-code">pass</span> na vyčistenie, potom <span class="inline-code">open(SUBOR, "a")</span> v podprograme na postupný zápis prvkov.</div>
           </div>
         </div>
       </article>
@@ -716,42 +734,735 @@
     <!-- TAB: KONZOLOVÉ ÚLOHY                       -->
     <!-- ========================================== -->
     <div id="tab-konzola" class="tab-content">
-      <nav class="subnav">
-        <span class="subnav__empty">Zatiaľ žiadne sekcie</span>
-      </nav>
-      <div class="placeholder">
-        <span class="placeholder__icon">💻</span>
-        <h2 class="placeholder__title">Konzolové úlohy</h2>
-        <p class="placeholder__desc">Tu budú poznámky ku konzolovým úlohám. Pridaj obsah priamo do <span class="inline-code">index.html</span> do tohto bloku.</p>
-      </div>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- TAB: EXCEL / WORD                          -->
-    <!-- ========================================== -->
-    <div id="tab-excel" class="tab-content">
+      <!-- SUB-NAVIGATION -->
       <nav class="subnav">
-        <span class="subnav__empty">Zatiaľ žiadne sekcie</span>
+        <a href="#kz-kostra"  class="subnav__link active"><span class="subnav__num">1</span> Kostra</a>
+        <a href="#kz-subory"  class="subnav__link"><span class="subnav__num">2</span> Súbory</a>
+        <a href="#kz-retazce" class="subnav__link"><span class="subnav__num">3</span> Reťazce</a>
+        <a href="#kz-listy"   class="subnav__link"><span class="subnav__num">4</span> Listy</a>
+        <a href="#kz-dict"    class="subnav__link"><span class="subnav__num">5</span> Slovníky</a>
+        <a href="#kz-minmax"  class="subnav__link"><span class="subnav__num">6</span> Min/Max</a>
+        <a href="#kz-cykly"   class="subnav__link"><span class="subnav__num">7</span> Cykly</a>
+        <a href="#kz-random"  class="subnav__link"><span class="subnav__num">8</span> Random/Set</a>
       </nav>
-      <div class="placeholder">
-        <span class="placeholder__icon">📊</span>
-        <h2 class="placeholder__title">Excel / Word</h2>
-        <p class="placeholder__desc">Tu budú poznámky k práci s Excel a Word. Pridaj obsah priamo do <span class="inline-code">index.html</span> do tohto bloku.</p>
-      </div>
-    </div>
 
-    <!-- ========================================== -->
-    <!-- TAB: GRAFIKA                               -->
-    <!-- ========================================== -->
-    <div id="tab-grafika" class="tab-content">
-      <nav class="subnav">
-        <span class="subnav__empty">Zatiaľ žiadne sekcie</span>
-      </nav>
-      <div class="placeholder">
-        <span class="placeholder__icon">🎨</span>
-        <h2 class="placeholder__title">Grafika</h2>
-        <p class="placeholder__desc">Tu budú poznámky ku grafike. Pridaj obsah priamo do <span class="inline-code">index.html</span> do tohto bloku.</p>
-      </div>
+      <!-- SECTION 1: Kostra programu -->
+      <article class="section" id="kz-kostra" data-keywords="input main def funkcia kostra vstup používateľ konvertovanie int float strip">
+        <h2 class="section__title">
+          <span class="section__number">1</span>
+          Kostra programu a vstup od používateľa
+        </h2>
+        <p class="section__desc">
+          Konzolové úlohy zvyčajne riešia: <strong>(1)</strong> načítaj vstup, <strong>(2)</strong> spracuj dáta, <strong>(3)</strong> vypíš alebo zapíš výsledok. Celý kód uzatvor do funkcie – aby si ho mohol volať s rôznymi súbormi.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Vstup z klávesnice – <span class="inline-code">input()</span></h3>
+          <p class="subsection__desc">
+            <span class="inline-code">input()</span> vždy vráti <strong>reťazec (string)</strong>. Ak chceš číslo, musíš to obaliť do <span class="inline-code">int()</span> alebo <span class="inline-code">float()</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Jeden reťazec</span>
+<span class="var">meno</span> = <span class="bi">input</span>(<span class="st">"Zadaj meno: "</span>)
+
+<span class="cm"># Číslo – treba obaliť int() alebo float()</span>
+<span class="var">vek</span> = <span class="bi">int</span>(<span class="bi">input</span>(<span class="st">"Zadaj vek: "</span>))
+
+<span class="cm"># Viac hodnôt naraz oddelených medzerou → split()</span>
+<span class="var">tipy</span> = <span class="bi">input</span>(<span class="st">"Zadaj 6 čísel: "</span>).<span class="fn">split</span>()  <span class="cm"># list reťazcov</span>
+
+<span class="cm"># Hneď premeniť na čísla</span>
+<span class="var">cisla</span> = [<span class="bi">int</span>(<span class="var">x</span>) <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="bi">input</span>(<span class="st">"Čísla: "</span>).<span class="fn">split</span>()]</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Hlavná funkcia + spustenie</h3>
+          <p class="subsection__desc">
+            Funkcia drží logiku, parameter umožní volať s rôznymi súbormi. Blok <span class="inline-code">if __name__ == "__main__"</span> je voliteľný štandard, ale stačí aj jednoduché volanie pod definíciou.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">def</span> <span class="fn">spracuj</span>(<span class="param">vstup</span>: <span class="bi">str</span>):
+    <span class="kw">with</span> <span class="bi">open</span>(<span class="var">vstup</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+        <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+    <span class="cm"># ... logika ...</span>
+    <span class="bi">print</span>(<span class="st">"Výsledok"</span>)
+
+<span class="var">vstup</span> = <span class="st">"data.txt"</span>
+<span class="var">spracuj</span>(<span class="var">vstup</span>)</code></pre>
+          </div>
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div>Cestu k súboru drž v premennej <strong>nad volaním funkcie</strong>. Funkcia by mala fungovať s ľubovoľnou cestou.</div>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 2: Súbory -->
+      <article class="section" id="kz-subory" data-keywords="open file súbor readlines read write writelines encoding utf-8 windows-1250 with as fr fw mód režim r w a strip">
+        <h2 class="section__title">
+          <span class="section__number">2</span>
+          Práca so súbormi
+        </h2>
+        <p class="section__desc">
+          Najčastejšia operácia v konzolových úlohách. Súbor vždy otváraj cez <span class="inline-code">with open(...) as ...</span> – sám sa zavrie po skončení bloku.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Čítanie celého súboru – <span class="inline-code">readlines()</span></h3>
+          <p class="subsection__desc">
+            <span class="inline-code">readlines()</span> vráti <strong>list reťazcov</strong>. Každý riadok obsahuje <span class="inline-code">\n</span> na konci – preto vždy <span class="inline-code">.strip()</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+
+<span class="kw">for</span> <span class="var">riadok</span> <span class="kw">in</span> <span class="var">riadky</span>:
+    <span class="var">cisty</span> = <span class="var">riadok</span>.<span class="fn">strip</span>()  <span class="cm"># odstráni \n + okolité medzery</span>
+    <span class="bi">print</span>(<span class="var">cisty</span>)
+
+<span class="cm"># Prvý riadok zvlášť (napr. hlavička, kapacita)</span>
+<span class="var">prvy</span>   = <span class="var">riadky</span>[<span class="nb">0</span>].<span class="fn">strip</span>()
+<span class="var">zvysok</span> = <span class="var">riadky</span>[<span class="nb">1</span>:]  <span class="cm"># všetky okrem prvého</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Režimy otvárania – <span class="inline-code">"r"</span>, <span class="inline-code">"w"</span>, <span class="inline-code">"a"</span></h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># "r" = READ – súbor musí existovať</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+
+<span class="cm"># "w" = WRITE – ZMAŽE celý obsah a vytvorí nový!</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"vystup.txt"</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Prepíše všetko\n"</span>)
+
+<span class="cm"># "a" = APPEND – pridá na koniec, NEPREPÍŠE</span>
+<span class="kw">with</span> <span class="bi">open</span>(<span class="st">"vystup.txt"</span>, <span class="st">"a"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">"Pridá pod existujúce\n"</span>)</code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div><strong>Encoding:</strong> Bežné <span class="inline-code">.txt</span> → <span class="inline-code">utf-8</span>. CSV export z Excelu → <span class="inline-code">windows-1250</span>, oddeľovač <span class="inline-code">;</span>.</div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Zápis – <span class="inline-code">write()</span> a <span class="inline-code">writelines()</span></h3>
+          <p class="subsection__desc">
+            <span class="inline-code">write()</span> zapíše jeden reťazec – musíš sám pridať <span class="inline-code">\n</span>. <span class="inline-code">writelines()</span> zapíše celý list naraz (tiež bez automatického <span class="inline-code">\n</span>).
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">with</span> <span class="bi">open</span>(<span class="st">"vystup.txt"</span>, <span class="st">"w"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fw</span>:
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"{</span><span class="var">meno</span><span class="st">} {</span><span class="var">priezvisko</span><span class="st">}\n"</span>)
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"{</span><span class="var">cislo</span><span class="st">:</span><span class="nb">5</span><span class="st">d}\n"</span>)        <span class="cm"># zarovnanie na 5 znakov</span>
+    <span class="var">fw</span>.<span class="fn">write</span>(<span class="st">f"{</span><span class="var">meno</span><span class="st">:&lt;</span><span class="nb">20</span><span class="st">}{</span><span class="var">vek</span><span class="st">}\n"</span>)  <span class="cm"># stĺpec šírka 20</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">CSV (oddeľovač + viaceré stĺpce)</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.csv"</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"windows-1250"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+
+<span class="cm"># List comprehension: každý riadok rozdeliť podľa ;</span>
+<span class="var">tabulka</span> = [<span class="var">r</span>.<span class="fn">strip</span>().<span class="fn">split</span>(<span class="st">";"</span>) <span class="kw">for</span> <span class="var">r</span> <span class="kw">in</span> <span class="var">riadky</span>]
+
+<span class="kw">for</span> <span class="var">zaznam</span> <span class="kw">in</span> <span class="var">tabulka</span>:
+    <span class="var">stlpec1</span> = <span class="var">zaznam</span>[<span class="nb">0</span>]
+    <span class="var">stlpec2</span> = <span class="var">zaznam</span>[<span class="nb">1</span>]</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 3: Reťazce -->
+      <article class="section" id="kz-retazce" data-keywords="string reťazec split join strip replace upper lower slicing slice [::-1] isalpha isdigit count find chr ord">
+        <h2 class="section__title">
+          <span class="section__number">3</span>
+          Spracovanie reťazcov
+        </h2>
+        <p class="section__desc">
+          Reťazce sú základ – textové dáta zo súborov a vstupu. Tieto metódy potrebuješ pri každej úlohe.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Rozdelenie a spojenie – <span class="inline-code">split()</span> / <span class="inline-code">join()</span></h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># split() bez argumentu = rozdelí podľa BIELYCH znakov (medzery, taby, \n)</span>
+<span class="var">slova</span> = <span class="st">"ahoj svet python"</span>.<span class="fn">split</span>()       <span class="cm"># ["ahoj", "svet", "python"]</span>
+
+<span class="cm"># split(",") = rozdelí podľa konkrétneho znaku</span>
+<span class="var">casti</span> = <span class="st">"Janko;Mrkvička;15"</span>.<span class="fn">split</span>(<span class="st">";"</span>)    <span class="cm"># ["Janko", "Mrkvička", "15"]</span>
+
+<span class="cm"># split(" ", 2) = rozdelí maximálne 2-krát (= 3 časti)</span>
+<span class="var">prve_dve</span> = <span class="st">"a b c d e"</span>.<span class="fn">split</span>(<span class="st">" "</span>, <span class="nb">2</span>)     <span class="cm"># ["a", "b", "c d e"]</span>
+
+<span class="cm"># join() = opak split – spojí list reťazcov</span>
+<span class="var">veta</span>   = <span class="st">" "</span>.<span class="fn">join</span>([<span class="st">"ahoj"</span>, <span class="st">"svet"</span>])      <span class="cm"># "ahoj svet"</span>
+<span class="var">csv</span>    = <span class="st">";"</span>.<span class="fn">join</span>([<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>])         <span class="cm"># "a;b;c"</span>
+<span class="var">bezmedz</span> = <span class="st">""</span>.<span class="fn">join</span>([<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>])         <span class="cm"># "abc"</span></code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div><span class="inline-code">join()</span> funguje LEN s listom reťazcov! Ak máš čísla, premeň: <span class="inline-code">", ".join(map(str, cisla))</span> alebo <span class="inline-code">", ".join(str(c) for c in cisla)</span>.</div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Čistenie a zmena – <span class="inline-code">strip</span>, <span class="inline-code">replace</span>, <span class="inline-code">upper</span>, <span class="inline-code">lower</span></h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="st">"  ahoj  \n"</span>.<span class="fn">strip</span>()           <span class="cm"># "ahoj" – orezáva oba okraje</span>
+<span class="st">"ahoj"</span>.<span class="fn">upper</span>()                 <span class="cm"># "AHOJ"</span>
+<span class="st">"AHOJ"</span>.<span class="fn">lower</span>()                 <span class="cm"># "ahoj"</span>
+<span class="st">"12,5"</span>.<span class="fn">replace</span>(<span class="st">","</span>, <span class="st">"."</span>)       <span class="cm"># "12.5"  – nahradí všetky výskyty</span>
+<span class="st">"+12"</span>.<span class="fn">replace</span>(<span class="st">"+"</span>, <span class="st">""</span>)          <span class="cm"># "12"   – odstránenie znaku</span>
+<span class="st">"abcabc"</span>.<span class="fn">count</span>(<span class="st">"a"</span>)             <span class="cm"># 2      – počet výskytov</span>
+<span class="st">"ABC"</span>.<span class="fn">find</span>(<span class="st">"B"</span>)                  <span class="cm"># 1      – index prvého výskytu (-1 ak nie je)</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Rezanie reťazca – <span class="inline-code">[a:b]</span> a <span class="inline-code">[::-1]</span></h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">s</span> = <span class="st">"Python"</span>
+
+<span class="var">s</span>[<span class="nb">0</span>]        <span class="cm"># "P"     – prvý znak</span>
+<span class="var">s</span>[-<span class="nb">1</span>]       <span class="cm"># "n"     – posledný znak</span>
+<span class="var">s</span>[<span class="nb">0</span>:<span class="nb">3</span>]      <span class="cm"># "Pyt"   – od 0 (vrátane) po 3 (BEZ)</span>
+<span class="var">s</span>[<span class="nb">1</span>:-<span class="nb">1</span>]     <span class="cm"># "ytho"  – bez prvého a posledného</span>
+<span class="var">s</span>[:<span class="nb">3</span>]       <span class="cm"># "Pyt"   – od začiatku</span>
+<span class="var">s</span>[<span class="nb">3</span>:]       <span class="cm"># "hon"   – po koniec</span>
+<span class="var">s</span>[::-<span class="nb">1</span>]     <span class="cm"># "nohtyP" – OBRÁTENIE reťazca!</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Testovacie metódy – <span class="inline-code">isalpha</span>, <span class="inline-code">isdigit</span></h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="st">"abc"</span>.<span class="fn">isalpha</span>()    <span class="cm"># True  – obsahuje LEN písmená</span>
+<span class="st">"abc1"</span>.<span class="fn">isalpha</span>()   <span class="cm"># False – obsahuje aj číslo</span>
+<span class="st">"123"</span>.<span class="fn">isdigit</span>()    <span class="cm"># True  – obsahuje LEN číslice</span>
+<span class="st">"abc"</span>.<span class="fn">isupper</span>()    <span class="cm"># False – nie je veľkými písmenami</span>
+<span class="st">"ABC"</span>.<span class="fn">isupper</span>()    <span class="cm"># True</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">ASCII konverzia – <span class="inline-code">chr()</span> a <span class="inline-code">ord()</span></h3>
+          <p class="subsection__desc">
+            Pre úlohy na šifrovanie/posunutie znakov v abecede.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="bi">ord</span>(<span class="st">"a"</span>)     <span class="cm"># 97  – ASCII kód znaku</span>
+<span class="bi">ord</span>(<span class="st">"A"</span>)     <span class="cm"># 65</span>
+<span class="bi">chr</span>(<span class="nb">97</span>)      <span class="cm"># "a" – znak z ASCII kódu</span>
+
+<span class="cm"># Posunutie písmena o 3 v abecede</span>
+<span class="var">posun</span> = <span class="bi">chr</span>(<span class="bi">ord</span>(<span class="st">"a"</span>) + <span class="nb">3</span>)   <span class="cm"># "d"</span></code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 4: Listy -->
+      <article class="section" id="kz-listy" data-keywords="list zoznam append extend pop remove sort sorted reversed list comprehension index slicing range len in not in">
+        <h2 class="section__title">
+          <span class="section__number">4</span>
+          Listy (zoznamy)
+        </h2>
+        <p class="section__desc">
+          List drží <strong>postupnosť hodnôt</strong> – v poradí, prístup cez index. Najčastejšia dátová štruktúra.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Základné operácie</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">zoznam</span> = []
+<span class="var">zoznam</span>.<span class="fn">append</span>(<span class="st">"a"</span>)         <span class="cm"># pridá na koniec</span>
+<span class="var">zoznam</span>.<span class="fn">extend</span>([<span class="st">"b"</span>, <span class="st">"c"</span>])    <span class="cm"># pridá viacero naraz</span>
+<span class="var">zoznam</span>.<span class="fn">remove</span>(<span class="st">"a"</span>)         <span class="cm"># odstráni prvý výskyt</span>
+<span class="var">zoznam</span>.<span class="fn">pop</span>()                <span class="cm"># odstráni a vráti posledný</span>
+<span class="var">zoznam</span>.<span class="fn">pop</span>(<span class="nb">0</span>)               <span class="cm"># odstráni a vráti prvý</span>
+
+<span class="bi">len</span>(<span class="var">zoznam</span>)                <span class="cm"># dĺžka</span>
+<span class="st">"a"</span> <span class="kw">in</span> <span class="var">zoznam</span>              <span class="cm"># True/False – či obsahuje</span>
+<span class="var">zoznam</span>[<span class="nb">0</span>]                  <span class="cm"># prvý prvok</span>
+<span class="var">zoznam</span>[-<span class="nb">1</span>]                 <span class="cm"># posledný prvok</span>
+<span class="var">zoznam</span>[<span class="nb">1</span>:<span class="nb">3</span>]                <span class="cm"># pod-list (rovnaký princíp ako string slicing)</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Triedenie – <span class="inline-code">sort()</span> vs <span class="inline-code">sorted()</span></h3>
+          <p class="subsection__desc">
+            <span class="inline-code">sort()</span> mení samotný list. <span class="inline-code">sorted()</span> vráti novú zoradenú kópiu.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">cisla</span> = [<span class="nb">3</span>, <span class="nb">1</span>, <span class="nb">2</span>]
+<span class="var">cisla</span>.<span class="fn">sort</span>()                       <span class="cm"># mení list: [1, 2, 3]</span>
+<span class="var">cisla</span>.<span class="fn">sort</span>(<span class="param">reverse</span>=<span class="bi">True</span>)           <span class="cm"># zostupne: [3, 2, 1]</span>
+
+<span class="var">nove</span> = <span class="bi">sorted</span>(<span class="var">cisla</span>)               <span class="cm"># vráti novú kópiu, pôvodný nemení</span>
+
+<span class="cm"># Triedenie listu slovníkov podľa kľúča</span>
+<span class="var">ludia</span> = [{<span class="st">"meno"</span>: <span class="st">"B"</span>, <span class="st">"vek"</span>: <span class="nb">20</span>}, {<span class="st">"meno"</span>: <span class="st">"A"</span>, <span class="st">"vek"</span>: <span class="nb">30</span>}]
+<span class="var">podla_veku</span> = <span class="bi">sorted</span>(<span class="var">ludia</span>, <span class="param">key</span>=<span class="kw">lambda</span> <span class="param">p</span>: <span class="param">p</span>[<span class="st">"vek"</span>])</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">List comprehension – kompaktný cyklus</h3>
+          <p class="subsection__desc">
+            Stručný zápis pre vytvorenie listu pomocou cyklu. Forma: <span class="inline-code">[výraz for prvok in zdroj if podmienka]</span>.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Druhé mocniny 0–4</span>
+<span class="var">stvorce</span> = [<span class="var">x</span> ** <span class="nb">2</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="nb">5</span>)]      <span class="cm"># [0, 1, 4, 9, 16]</span>
+
+<span class="cm"># Konverzia listu reťazcov na čísla</span>
+<span class="var">cisla</span> = [<span class="bi">int</span>(<span class="var">x</span>) <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> [<span class="st">"1"</span>, <span class="st">"2"</span>, <span class="st">"3"</span>]]   <span class="cm"># [1, 2, 3]</span>
+
+<span class="cm"># Strip + split každého riadku zo súboru</span>
+<span class="var">tabulka</span> = [<span class="var">r</span>.<span class="fn">strip</span>().<span class="fn">split</span>(<span class="st">";"</span>) <span class="kw">for</span> <span class="var">r</span> <span class="kw">in</span> <span class="var">riadky</span>]
+
+<span class="cm"># S podmienkou – len párne</span>
+<span class="var">parne</span> = [<span class="var">x</span> <span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="nb">10</span>) <span class="kw">if</span> <span class="var">x</span> % <span class="nb">2</span> == <span class="nb">0</span>]</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 5: Slovníky -->
+      <article class="section" id="kz-dict" data-keywords="dict slovník dictionary key value items keys values záznam list of dicts dict comprehension in get">
+        <h2 class="section__title">
+          <span class="section__number">5</span>
+          Slovníky (dict) a zoznam záznamov
+        </h2>
+        <p class="section__desc">
+          Slovník je <strong>kľúč → hodnota</strong>. List slovníkov je najčastejší spôsob ako udržať tabuľkové dáta (každý riadok = záznam).
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Základné operácie so slovníkom</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">osoba</span> = {<span class="st">"meno"</span>: <span class="st">"Janko"</span>, <span class="st">"vek"</span>: <span class="nb">20</span>}
+
+<span class="var">osoba</span>[<span class="st">"meno"</span>]                  <span class="cm"># "Janko"</span>
+<span class="var">osoba</span>[<span class="st">"vek"</span>] = <span class="nb">21</span>                <span class="cm"># úprava hodnoty</span>
+<span class="var">osoba</span>[<span class="st">"email"</span>] = <span class="st">"a@b.sk"</span>        <span class="cm"># pridanie nového kľúča</span>
+
+<span class="st">"meno"</span> <span class="kw">in</span> <span class="var">osoba</span>                <span class="cm"># True – či kľúč existuje</span>
+<span class="var">osoba</span>.<span class="fn">get</span>(<span class="st">"email"</span>, <span class="st">"–"</span>)         <span class="cm"># bezpečné získanie s defaultom</span>
+
+<span class="kw">for</span> <span class="var">kluc</span>, <span class="var">hodnota</span> <span class="kw">in</span> <span class="var">osoba</span>.<span class="fn">items</span>():
+    <span class="bi">print</span>(<span class="var">kluc</span>, <span class="st">":"</span>, <span class="var">hodnota</span>)</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Vytvorenie záznamov zo súboru (list dictov)</h3>
+          <p class="subsection__desc">
+            Toto je <strong>najčastejší vzor</strong> v maturitných úlohách. Každý riadok = jeden záznam = jeden slovník v liste.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">with</span> <span class="bi">open</span>(<span class="st">"data.txt"</span>, <span class="st">"r"</span>, <span class="param">encoding</span>=<span class="st">"utf-8"</span>) <span class="kw">as</span> <span class="var">fr</span>:
+    <span class="var">riadky</span> = <span class="var">fr</span>.<span class="fn">readlines</span>()
+
+<span class="var">zaznamy</span> = []
+<span class="kw">for</span> <span class="var">riadok</span> <span class="kw">in</span> <span class="var">riadky</span>:
+    <span class="var">meno</span>, <span class="var">priezvisko</span>, <span class="var">vek</span> = <span class="var">riadok</span>.<span class="fn">strip</span>().<span class="fn">split</span>()  <span class="cm"># rozbalenie</span>
+    <span class="var">zaznamy</span>.<span class="fn">append</span>({
+        <span class="st">"meno"</span>:       <span class="var">meno</span>,
+        <span class="st">"priezvisko"</span>: <span class="var">priezvisko</span>,
+        <span class="st">"vek"</span>:        <span class="bi">int</span>(<span class="var">vek</span>)
+    })
+
+<span class="cm"># Prístup k poliam záznamu</span>
+<span class="kw">for</span> <span class="var">z</span> <span class="kw">in</span> <span class="var">zaznamy</span>:
+    <span class="bi">print</span>(<span class="st">f"{</span><span class="var">z</span>[<span class="st">'meno'</span>]<span class="st">} má {</span><span class="var">z</span>[<span class="st">'vek'</span>]<span class="st">} rokov"</span>)</code></pre>
+          </div>
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div>Číslo vždy obaľ do <span class="inline-code">int()</span> už pri vytváraní záznamu – inak ti zostane reťazec a neporovnáš ho ako číslo.</div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Dict comprehension a počítanie kategórií</h3>
+          <p class="subsection__desc">
+            Klasická úloha: spočítaj, koľkokrát sa každá hodnota vyskytuje.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Dict comprehension – inicializácia na 0</span>
+<span class="var">pocty</span> = {<span class="var">znak</span>: <span class="nb">0</span> <span class="kw">for</span> <span class="var">znak</span> <span class="kw">in</span> <span class="st">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>}
+
+<span class="cm"># Vzor: ak kľúč nie je v dicte, založ ho na 1, inak zvýš</span>
+<span class="var">pocty_krajin</span> = {}
+<span class="kw">for</span> <span class="var">z</span> <span class="kw">in</span> <span class="var">zaznamy</span>:
+    <span class="var">krajina</span> = <span class="var">z</span>[<span class="st">"krajina"</span>]
+    <span class="kw">if</span> <span class="var">krajina</span> <span class="kw">not</span> <span class="kw">in</span> <span class="var">pocty_krajin</span>:
+        <span class="var">pocty_krajin</span>[<span class="var">krajina</span>] = <span class="nb">1</span>
+    <span class="kw">else</span>:
+        <span class="var">pocty_krajin</span>[<span class="var">krajina</span>] += <span class="nb">1</span>
+
+<span class="cm"># Výpis výsledkov</span>
+<span class="kw">for</span> <span class="var">krajina</span>, <span class="var">pocet</span> <span class="kw">in</span> <span class="var">pocty_krajin</span>.<span class="fn">items</span>():
+    <span class="bi">print</span>(<span class="st">f"{</span><span class="var">krajina</span><span class="st">}: {</span><span class="var">pocet</span><span class="st">}"</span>)</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 6: Min/Max -->
+      <article class="section" id="kz-minmax" data-keywords="min max sum len key lambda hľadanie najvyššia najnižšia priemer average súčet count">
+        <h2 class="section__title">
+          <span class="section__number">6</span>
+          Min, Max, počítanie a priemer
+        </h2>
+        <p class="section__desc">
+          Vstavané funkcie <span class="inline-code">min</span>, <span class="inline-code">max</span>, <span class="inline-code">sum</span>, <span class="inline-code">len</span> ti ušetria desiatky riadkov cyklov.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Min/Max/Sum nad listom čísel</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">cisla</span> = [<span class="nb">10</span>, <span class="nb">5</span>, <span class="nb">8</span>, <span class="nb">3</span>, <span class="nb">12</span>]
+
+<span class="bi">max</span>(<span class="var">cisla</span>)               <span class="cm"># 12</span>
+<span class="bi">min</span>(<span class="var">cisla</span>)               <span class="cm"># 3</span>
+<span class="bi">sum</span>(<span class="var">cisla</span>)               <span class="cm"># 38</span>
+<span class="bi">len</span>(<span class="var">cisla</span>)               <span class="cm"># 5</span>
+
+<span class="cm"># Priemer</span>
+<span class="var">priemer</span> = <span class="bi">sum</span>(<span class="var">cisla</span>) / <span class="bi">len</span>(<span class="var">cisla</span>)   <span class="cm"># 7.6</span>
+
+<span class="cm"># Maximum z viacerých argumentov (nie listu)</span>
+<span class="bi">max</span>(<span class="nb">3</span>, <span class="nb">7</span>, <span class="nb">2</span>)               <span class="cm"># 7</span></code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Max so záznamami – <span class="inline-code">key=lambda</span></h3>
+          <p class="subsection__desc">
+            Ak máš list slovníkov, povedz Pythonu <strong>podľa čoho</strong> hľadať max. <span class="inline-code">lambda</span> je „rýchla funkcia" v jednom riadku.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">ludia</span> = [
+    {<span class="st">"meno"</span>: <span class="st">"Anna"</span>, <span class="st">"vek"</span>: <span class="nb">25</span>},
+    {<span class="st">"meno"</span>: <span class="st">"Boris"</span>, <span class="st">"vek"</span>: <span class="nb">30</span>}
+]
+
+<span class="cm"># Záznam s najvyšším vekom</span>
+<span class="var">najstarsi</span> = <span class="bi">max</span>(<span class="var">ludia</span>, <span class="param">key</span>=<span class="kw">lambda</span> <span class="param">p</span>: <span class="param">p</span>[<span class="st">"vek"</span>])
+<span class="bi">print</span>(<span class="var">najstarsi</span>[<span class="st">"meno"</span>])           <span class="cm"># "Boris"</span>
+
+<span class="cm"># Najdlhšie meno</span>
+<span class="var">najdlhsi</span> = <span class="bi">max</span>(<span class="var">ludia</span>, <span class="param">key</span>=<span class="kw">lambda</span> <span class="param">p</span>: <span class="bi">len</span>(<span class="param">p</span>[<span class="st">"meno"</span>]))</code></pre>
+          </div>
+          <div class="alert alert--info">
+            <span class="alert__icon">ℹ️</span>
+            <div><strong>Lambda funkcie:</strong> <span class="inline-code">lambda p: p["vek"]</span> je to isté ako mať funkciu <span class="inline-code">def fn(p): return p["vek"]</span>. Iba kratšie a inline.</div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Hľadanie cyklom (ak nestačí <span class="inline-code">max</span>)</h3>
+          <p class="subsection__desc">
+            Niekedy treba sledovať viacero premenných naraz, alebo nájsť VŠETKY záznamy s maximom.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Inicializuj na veľmi vysoké/nízke číslo</span>
+<span class="var">min_cas</span> = <span class="bi">float</span>(<span class="st">"inf"</span>)        <span class="cm"># nekonečno</span>
+<span class="var">vitaz</span> = <span class="bi">None</span>
+
+<span class="kw">for</span> <span class="var">pretekar</span> <span class="kw">in</span> <span class="var">ludia</span>:
+    <span class="kw">if</span> <span class="var">pretekar</span>[<span class="st">"cas"</span>] &lt; <span class="var">min_cas</span>:
+        <span class="var">min_cas</span> = <span class="var">pretekar</span>[<span class="st">"cas"</span>]
+        <span class="var">vitaz</span> = <span class="var">pretekar</span>
+
+<span class="cm"># Všetci s rovnakým maximom (pre prípad rovnosti)</span>
+<span class="var">max_vykon</span> = <span class="bi">max</span>(<span class="var">z</span>[<span class="st">"vykon"</span>] <span class="kw">for</span> <span class="var">z</span> <span class="kw">in</span> <span class="var">zaznamy</span>)
+<span class="var">vitazi</span> = [<span class="var">z</span> <span class="kw">for</span> <span class="var">z</span> <span class="kw">in</span> <span class="var">zaznamy</span> <span class="kw">if</span> <span class="var">z</span>[<span class="st">"vykon"</span>] == <span class="var">max_vykon</span>]</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Formátovanie čísel a času</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="cm"># Sekundy → min a sek</span>
+<span class="var">cas_s</span> = <span class="nb">185</span>
+<span class="bi">print</span>(<span class="st">f"{</span><span class="var">cas_s</span> // <span class="nb">60</span><span class="st">}min {</span><span class="var">cas_s</span> % <span class="nb">60</span><span class="st">}sek"</span>)   <span class="cm"># 3min 5sek</span>
+
+<span class="cm"># Zaokrúhlenie</span>
+<span class="bi">round</span>(<span class="nb">3.14159</span>, <span class="nb">2</span>)                  <span class="cm"># 3.14</span>
+
+<span class="cm"># f-string formátovanie čísel</span>
+<span class="bi">print</span>(<span class="st">f"{</span><span class="nb">3.14159</span><span class="st">:.2f}"</span>)              <span class="cm"># "3.14" – 2 desatinné</span>
+<span class="bi">print</span>(<span class="st">f"{</span><span class="nb">42</span><span class="st">:05d}"</span>)                 <span class="cm"># "00042" – doplnené nulami</span>
+<span class="bi">print</span>(<span class="st">f"{</span><span class="st">'ahoj'</span><span class="st">:&lt;10}|"</span>)             <span class="cm"># "ahoj      |" – zarovnanie vľavo (10 znakov)</span>
+<span class="bi">print</span>(<span class="st">f"{</span><span class="st">'ahoj'</span><span class="st">:&gt;10}|"</span>)             <span class="cm"># "      ahoj|" – zarovnanie vpravo</span></code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 7: Cykly -->
+      <article class="section" id="kz-cykly" data-keywords="for while range enumerate zip break continue cyklus iterácia index">
+        <h2 class="section__title">
+          <span class="section__number">7</span>
+          Cykly a iterácia
+        </h2>
+        <p class="section__desc">
+          Cyklus prechádza prvkami listu. <span class="inline-code">range</span>, <span class="inline-code">enumerate</span> a <span class="inline-code">zip</span> sú nástroje, ktoré ti veľmi pomôžu.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">range() – generovanie čísel</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="bi">range</span>(<span class="nb">5</span>)         <span class="cm"># 0, 1, 2, 3, 4</span>
+<span class="bi">range</span>(<span class="nb">1</span>, <span class="nb">6</span>)      <span class="cm"># 1, 2, 3, 4, 5</span>
+<span class="bi">range</span>(<span class="nb">0</span>, <span class="nb">10</span>, <span class="nb">2</span>)   <span class="cm"># 0, 2, 4, 6, 8</span>
+<span class="bi">range</span>(<span class="nb">10</span>, <span class="nb">0</span>, -<span class="nb">1</span>)  <span class="cm"># 10, 9, ..., 1 (od konca)</span>
+
+<span class="cm"># Indexovaný prístup k listu</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="bi">len</span>(<span class="var">zoznam</span>)):
+    <span class="bi">print</span>(<span class="var">i</span>, <span class="var">zoznam</span>[<span class="var">i</span>])</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">enumerate() – index + hodnota naraz</h3>
+          <p class="subsection__desc">
+            Lepšie ako <span class="inline-code">range(len(...))</span>. Vráti dvojicu (index, prvok).
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">mena</span> = [<span class="st">"Anna"</span>, <span class="st">"Boris"</span>, <span class="st">"Cyril"</span>]
+
+<span class="kw">for</span> <span class="var">i</span>, <span class="var">meno</span> <span class="kw">in</span> <span class="bi">enumerate</span>(<span class="var">mena</span>):
+    <span class="bi">print</span>(<span class="st">f"{</span><span class="var">i</span><span class="st">}. {</span><span class="var">meno</span><span class="st">}"</span>)
+<span class="cm"># 0. Anna</span>
+<span class="cm"># 1. Boris</span>
+<span class="cm"># 2. Cyril</span>
+
+<span class="cm"># Štart od 1 (číslovanie pre používateľa)</span>
+<span class="kw">for</span> <span class="var">i</span>, <span class="var">meno</span> <span class="kw">in</span> <span class="bi">enumerate</span>(<span class="var">mena</span>, <span class="param">start</span>=<span class="nb">1</span>):
+    <span class="bi">print</span>(<span class="var">i</span>, <span class="var">meno</span>)</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">zip() – prechádzanie dvoch listov naraz</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">mena</span>  = [<span class="st">"Anna"</span>, <span class="st">"Boris"</span>]
+<span class="var">veky</span>  = [<span class="nb">25</span>, <span class="nb">30</span>]
+
+<span class="kw">for</span> <span class="var">meno</span>, <span class="var">vek</span> <span class="kw">in</span> <span class="bi">zip</span>(<span class="var">mena</span>, <span class="var">veky</span>):
+    <span class="bi">print</span>(<span class="st">f"{</span><span class="var">meno</span><span class="st">}: {</span><span class="var">vek</span><span class="st">}"</span>)</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">break a continue</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">for</span> <span class="var">x</span> <span class="kw">in</span> <span class="bi">range</span>(<span class="nb">10</span>):
+    <span class="kw">if</span> <span class="var">x</span> == <span class="nb">5</span>:
+        <span class="kw">break</span>          <span class="cm"># úplne ukončí cyklus</span>
+    <span class="kw">if</span> <span class="var">x</span> % <span class="nb">2</span> == <span class="nb">0</span>:
+        <span class="kw">continue</span>       <span class="cm"># preskočí na ďalšiu iteráciu</span>
+    <span class="bi">print</span>(<span class="var">x</span>)</code></pre>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">while cyklus</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">i</span> = <span class="nb">0</span>
+<span class="kw">while</span> <span class="var">i</span> &lt; <span class="nb">5</span>:
+    <span class="bi">print</span>(<span class="var">i</span>)
+    <span class="var">i</span> += <span class="nb">1</span>          <span class="cm"># nezabudni zvyšovať, inak nekonečný cyklus!</span>
+
+<span class="cm"># Vstup, kým nepríde správna hodnota</span>
+<span class="var">odpoved</span> = <span class="st">""</span>
+<span class="kw">while</span> <span class="var">odpoved</span> != <span class="st">"koniec"</span>:
+    <span class="var">odpoved</span> = <span class="bi">input</span>(<span class="st">"Napíš: "</span>)</code></pre>
+          </div>
+        </div>
+      </article>
+
+      <!-- SECTION 8: Random + Set -->
+      <article class="section" id="kz-random" data-keywords="random sample shuffle choice randint set intersection union difference množina náhodné">
+        <h2 class="section__title">
+          <span class="section__number">8</span>
+          Náhodné čísla a množiny (set)
+        </h2>
+        <p class="section__desc">
+          Modul <span class="inline-code">random</span> pre náhodné dáta a <span class="inline-code">set</span> pre rýchle porovnávanie množín hodnôt.
+        </p>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Modul random – základné funkcie</h3>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="kw">import</span> <span class="cls">random</span> <span class="kw">as</span> <span class="cls">rd</span>
+
+<span class="cls">rd</span>.<span class="fn">randint</span>(<span class="nb">1</span>, <span class="nb">10</span>)             <span class="cm"># celé číslo 1–10 vrátane</span>
+<span class="cls">rd</span>.<span class="fn">random</span>()                  <span class="cm"># desatinné 0.0–1.0</span>
+<span class="cls">rd</span>.<span class="fn">choice</span>([<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>])      <span class="cm"># jeden náhodný prvok</span>
+<span class="cls">rd</span>.<span class="fn">choice</span>([<span class="bi">True</span>, <span class="bi">False</span>])         <span class="cm"># náhodne true/false</span>
+
+<span class="cm"># sample = N RÔZNYCH (bez opakovania) prvkov</span>
+<span class="cls">rd</span>.<span class="fn">sample</span>(<span class="bi">range</span>(<span class="nb">1</span>, <span class="nb">50</span>), <span class="nb">6</span>)      <span class="cm"># [3, 17, 42, 8, 25, 31]</span>
+<span class="cls">rd</span>.<span class="fn">sample</span>([<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>, <span class="st">"d"</span>], <span class="nb">2</span>)   <span class="cm"># 2 rôzne prvky</span>
+
+<span class="cm"># shuffle = zamieša list NA MIESTE (mení pôvodný!)</span>
+<span class="var">zoznam</span> = [<span class="nb">1</span>, <span class="nb">2</span>, <span class="nb">3</span>, <span class="nb">4</span>]
+<span class="cls">rd</span>.<span class="fn">shuffle</span>(<span class="var">zoznam</span>)              <span class="cm"># napr. [3, 1, 4, 2]</span></code></pre>
+          </div>
+          <div class="alert alert--warning">
+            <span class="alert__icon">⚠️</span>
+            <div><span class="inline-code">shuffle()</span> NEVRACIA nič – mení samotný list. Nepíš <span class="inline-code">x = rd.shuffle(zoznam)</span>, dostaneš <span class="inline-code">None</span>!</div>
+          </div>
+        </div>
+
+        <div class="subsection">
+          <h3 class="subsection__title">Set – množina unikátnych prvkov</h3>
+          <p class="subsection__desc">
+            Set drží <strong>iba jedinečné hodnoty</strong>. Má rýchle množinové operácie: prienik, zjednotenie, rozdiel.
+          </p>
+          <div class="code-block">
+            <div class="code-block__header">
+              <span class="code-block__lang">python</span>
+              <button class="code-block__copy">Kopírovať</button>
+            </div>
+            <pre><code><span class="var">a</span> = {<span class="nb">1</span>, <span class="nb">2</span>, <span class="nb">3</span>, <span class="nb">4</span>}
+<span class="var">b</span> = {<span class="nb">3</span>, <span class="nb">4</span>, <span class="nb">5</span>, <span class="nb">6</span>}
+
+<span class="var">a</span>.<span class="fn">intersection</span>(<span class="var">b</span>)        <span class="cm"># {3, 4} – prienik (čo majú spoločné)</span>
+<span class="var">a</span>.<span class="fn">union</span>(<span class="var">b</span>)               <span class="cm"># {1, 2, 3, 4, 5, 6} – zjednotenie</span>
+<span class="var">a</span>.<span class="fn">difference</span>(<span class="var">b</span>)          <span class="cm"># {1, 2} – čo má a, ale b nie</span>
+
+<span class="cm"># Odstránenie duplikátov zo zoznamu</span>
+<span class="var">unikatne</span> = <span class="bi">list</span>(<span class="bi">set</span>([<span class="nb">1</span>, <span class="nb">2</span>, <span class="nb">2</span>, <span class="nb">3</span>, <span class="nb">3</span>, <span class="nb">3</span>]))   <span class="cm"># [1, 2, 3]</span>
+
+<span class="cm"># Vytvorenie setu z listu reťazcov</span>
+<span class="var">tipy</span> = <span class="bi">set</span>([<span class="st">"3"</span>, <span class="st">"7"</span>, <span class="st">"21"</span>])
+<span class="var">vyhry</span> = {<span class="st">"3"</span>, <span class="st">"21"</span>, <span class="st">"49"</span>}
+<span class="var">uhadnute</span> = <span class="var">tipy</span>.<span class="fn">intersection</span>(<span class="var">vyhry</span>)   <span class="cm"># {"3", "21"}</span>
+<span class="bi">print</span>(<span class="bi">len</span>(<span class="var">uhadnute</span>))                  <span class="cm"># 2</span></code></pre>
+          </div>
+          <div class="alert alert--tip">
+            <span class="alert__icon">💡</span>
+            <div>Set comprehension funguje rovnako ako list: <span class="inline-code">{x*2 for x in range(5)}</span>.</div>
+          </div>
+        </div>
+      </article>
+
     </div>
 
     </main>
@@ -763,6 +1474,6 @@
     Informatika – Príručka · Vytvorené s 💜
   </footer>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>
