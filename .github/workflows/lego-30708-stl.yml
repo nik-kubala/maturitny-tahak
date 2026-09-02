@@ -1,0 +1,48 @@
+name: Build LEGO 30708 STL
+on:
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate STL files
+        run: python lego_30708_build/generate_30708_stls.py
+      - name: Build remote-safe plates
+        run: python lego_30708_build/make_remote_plates.py
+      - name: Package all outputs
+        run: |
+          cd lego_30708_build
+          python - <<'PY'
+          import pathlib,zipfile,csv,json
+          out=pathlib.Path("STL_30708")
+          rep=out/"_conversion_report.csv"
+          rows=list(csv.DictReader(rep.open(encoding="utf-8")))
+          stats={
+            "unique_ok":sum(r["status"]=="OK" for r in rows),
+            "unique_missing":sum(r["status"]!="OK" for r in rows),
+            "physical_ok":sum(int(r["qty"]) for r in rows if r["status"]=="OK"),
+            "physical_missing":sum(int(r["qty"]) for r in rows if r["status"]!="OK"),
+          }
+          pathlib.Path("conversion_summary.json").write_text(json.dumps(stats,indent=2),encoding="utf-8")
+          with zipfile.ZipFile("LEGO_30708_Millennium_Falcon_STLs.zip","w",zipfile.ZIP_DEFLATED) as z:
+              for f in out.rglob("*"):
+                  if f.is_file(): z.write(f,f.as_posix())
+              z.write("inventory_30708.csv","inventory_30708.csv")
+              z.write("conversion_summary.json","conversion_summary.json")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: LEGO-30708-Millennium-Falcon-STLs
+          path: |
+            lego_30708_build/LEGO_30708_Millennium_Falcon_STLs.zip
+            lego_30708_build/LEGO_30708_REMOTE_PLATES.zip
+            lego_30708_build/STL_30708/_conversion_report.csv
+            lego_30708_build/conversion_summary.json
+          if-no-files-found: error
